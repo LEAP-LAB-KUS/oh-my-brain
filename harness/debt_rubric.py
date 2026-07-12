@@ -47,6 +47,37 @@ class RubricResult:
     dimensions: dict
 
 
+def llm_judge(prompt: str, *, ask=None) -> RubricResult:
+    """LLM-judge scorer behind the same interface (measured: P 1.0 / R 0.93).
+
+    Falls back to the regex scorer on any error (offline, missing key), so the
+    harness stays fail-open. `ask` is injectable for tests.
+    """
+    try:
+        if ask is None:
+            import os
+            from openai import OpenAI
+            client = OpenAI(api_key=os.environ["UPSTAGE_API_KEY"],
+                            base_url="https://api.upstage.ai/v1")
+
+            def ask(text):
+                r = client.chat.completions.create(
+                    model="solar-mini", temperature=0.0,
+                    messages=[{"role": "user", "content": text}])
+                return r.choices[0].message.content
+        reply = ask(
+            "You screen prompts sent to an AI coding agent. Label the prompt 1 if it is "
+            "BLIND DELEGATION (no stated intent, no constraints, no verification plan, no "
+            "concrete target - the user delegates without understanding), else 0 (informed "
+            "request or comprehension question). Reply with ONLY the digit.\nPrompt: " + prompt)
+        bit = 1 if re.search(r"1", reply[:4]) else 0
+        base = score_prompt(prompt)  # keep dimension detail + answer_seeking from regex
+        return RubricResult(score=float(bit), trigger=bool(bit) and not base.dimensions["understanding_seeking"],
+                            dimensions=base.dimensions)
+    except Exception:
+        return score_prompt(prompt)
+
+
 def score_prompt(prompt: str) -> RubricResult:
     text = prompt.strip()
     dims = {

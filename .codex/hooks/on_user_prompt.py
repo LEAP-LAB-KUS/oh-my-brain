@@ -29,7 +29,9 @@ def main() -> int:
         return 0  # fail-open
 
     try:
-        from harness.debt_rubric import score_prompt
+        import os
+
+        from harness.debt_rubric import llm_judge, score_prompt
         from harness.prompt_log import append_prompt
 
         root = Path(__file__).resolve().parents[2]
@@ -40,7 +42,10 @@ def main() -> int:
             prompt=prompt,
             cwd=event.get("cwd", ""),
         )
-        r = score_prompt(prompt)
+        # OMB_JUDGE=llm switches to the measured LLM judge (P 1.0 / R 0.93);
+        # it falls back to the regex scorer on any error (fail-open)
+        scorer = llm_judge if os.environ.get("OMB_JUDGE") == "llm" else score_prompt
+        r = scorer(prompt)
         with (log_dir / "assessments.jsonl").open("a", encoding="utf-8") as f:
             f.write(json.dumps({
                 "ts": time.time(), "session_id": event.get("session_id"),

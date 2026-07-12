@@ -73,3 +73,17 @@ def test_understanding_seeking_prompts_never_trigger():
 def test_blind_delegation_still_triggers_after_exemption():
     for p in ("just fix it", "make it production ready", "optimize it"):
         assert score_prompt(p).trigger is True, p
+
+
+def test_llm_judge_uses_injected_ask_and_fails_open():
+    from harness.debt_rubric import llm_judge
+
+    r = llm_judge("just fix it", ask=lambda _: "1")
+    assert r.trigger is True and r.score == 1.0
+    r = llm_judge("Explain why this deadlocks in worker.py", ask=lambda _: "0")
+    assert r.trigger is False
+    # fail-open: an erroring judge falls back to the regex scorer
+    def boom(_):
+        raise RuntimeError("offline")
+    r = llm_judge("just fix it", ask=boom)
+    assert r.trigger is True  # regex fallback still catches blind delegation
