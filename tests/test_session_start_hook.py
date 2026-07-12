@@ -28,6 +28,7 @@ def test_first_session_injects_onboarding_and_marks(tmp_path):
     out = json.loads(r.stdout)
     ctx = out["hookSpecificOutput"]["additionalContext"]
     assert "oh-my-brain" in ctx and "onboard" in ctx.lower()
+    assert "dashboard" in ctx.lower() and ("file://" in ctx or "dashboard.html" in ctx)
     assert (tmp_path / ".onboarded").exists()
 
 

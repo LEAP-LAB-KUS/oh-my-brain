@@ -52,6 +52,27 @@ def test_kc_names_shown_when_available(tmp_path):
     assert "web-http" in html
 
 
+def test_mastery_predictions_shown_with_status_badges(tmp_path):
+    # user feedback round 4: show model-predicted mastery and mastered/learning status
+    root = _seed(tmp_path)
+    (root / "kt" / "data" / "kc.json").write_text(
+        '{"kcs": {"concurrency": 1, "web-http": 2}, "questions": {}}')
+    fake = {"1": 0.85, "2": 0.35}
+    html = build_dashboard(root, mastery_fn=lambda kc, history: fake[kc])
+    text = html.read_text(encoding="utf-8")
+    assert "Mastery" in text and "85%" in text and "35%" in text
+    assert "mastered" in text.lower()
+    assert "needs work" in text.lower()
+
+
+def test_dashboard_works_without_kt_model(tmp_path):
+    root = _seed(tmp_path)
+    html = build_dashboard(root, mastery_fn=None).read_text(encoding="utf-8")
+    assert "Accuracy" in html  # observed stats still render
+    # no crash, no bogus mastery column when model unavailable
+    assert "Mastery (model)" not in html
+
+
 def test_interactive_learning_map_embedded(tmp_path):
     # user feedback round 3: interactive learning map (self-contained SVG + JS)
     root = _seed(tmp_path)

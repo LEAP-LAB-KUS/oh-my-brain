@@ -22,6 +22,7 @@ h1{font-size:1.4rem} h2{font-size:1.05rem;margin-top:1.6rem}
 table{border-collapse:collapse;width:100%} td,th{border:1px solid #ccc;padding:.4rem .6rem;text-align:left}
 .bar{background:#4a7;color:#fff;padding:0 .3rem;border-radius:3px;display:inline-block}
 .miss{background:#c66}
+.mid{background:#c93}
 small{color:#666}
 #kcdetail{border:1px solid #ccc;border-radius:4px;padding:.6rem .8rem;min-height:2.2rem;color:#333}
 svg text{pointer-events:none}
@@ -56,7 +57,8 @@ def _kc_names(root: Path) -> dict[str, str]:
     return names
 
 
-def _learning_map_svg(kc_stats: dict[str, dict], names: dict[str, str]) -> str:
+def _learning_map_svg(kc_stats: dict[str, dict], names: dict[str, str],
+                      mastery_vals: dict[str, float] | None = None) -> str:
     """Interactive SVG: one node per KC on a ring; click shows details."""
     n = len(kc_stats)
     if not n:
@@ -75,7 +77,8 @@ def _learning_map_svg(kc_stats: dict[str, dict], names: dict[str, str]) -> str:
         hue = int(120 * acc)
         name = names.get(kc, f"KC {kc}")
         payload[kc] = {"name": name, "attempts": s["attempts"],
-                       "accuracy": round(100 * acc), "recent": s["recent"]}
+                       "accuracy": round(100 * acc), "recent": s["recent"],
+                       "mastery": round(100 * mastery_vals[kc]) if mastery_vals and kc in mastery_vals else None}
         nodes.append(
             f"<circle class='kc' data-kc='{kc}' cx='{x:.0f}' cy='{y:.0f}' r='{r}' "
             f"fill='hsl({hue},55%,55%)'/>"
@@ -96,7 +99,8 @@ document.querySelectorAll('circle.kc').forEach(c => c.addEventListener('click', 
   const d = KC[c.dataset.kc];
   document.getElementById('kcdetail').innerHTML =
     '<b>' + d.name + '</b> &mdash; ' + d.attempts + ' attempts, ' + d.accuracy +
-    '% accuracy<br><small>recent outcomes: ' + d.recent + '</small>';
+    '% accuracy' + (d.mastery !== null ? ', model mastery ' + d.mastery + '%' : '') +
+    '<br><small>recent outcomes: ' + d.recent + '</small>';
 }}));
 </script>"""
     return (f"<h2>Learning map</h2>"
@@ -105,8 +109,35 @@ document.querySelectorAll('circle.kc').forEach(c => c.addEventListener('click', 
             f"Node size = attempts, color = accuracy.</small></div>{script}")
 
 
-def build_dashboard(root: Path | str, out_path: Path | str | None = None) -> Path:
+def _default_mastery_fn(root: Path):
+    """Model-backed mastery: P(correct) for each KC given the full history.
+    Returns None when no trained checkpoint exists (dashboard degrades softly)."""
+    ckpt = root / "kt" / "models" / "akt.pt"
+    if not ckpt.exists():
+        return None
+    try:
+        from kt.train import mastery
+
+        def fn(kc: str, history: list[tuple[int, int]]) -> float:
+            return mastery(ckpt, history=history, kc_id=int(kc))
+        return fn
+    except Exception:
+        return None
+
+
+def _status(m: float) -> tuple[str, str]:
+    if m >= 0.8:
+        return "mastered", "bar"
+    if m >= 0.4:
+        return "learning", "bar mid"
+    return "needs work", "bar miss"
+
+
+def build_dashboard(root: Path | str, out_path: Path | str | None = None,
+                    mastery_fn="auto") -> Path:
     root = Path(root)
+    if mastery_fn == "auto":
+        mastery_fn = _default_mastery_fn(root)
     out = Path(out_path) if out_path else root / "learning" / "dashboard.html"
     out.parent.mkdir(parents=True, exist_ok=True)
 
@@ -134,20 +165,43 @@ def build_dashboard(root: Path | str, out_path: Path | str | None = None) -> Pat
         for kc, s in kc_stats.items():
             tail = [r for r in rows if r["kc_id"] == kc][-8:]
             s["recent"] = " ".join("O" if int(r["correct"]) else "X" for r in tail)
+        mastery_vals: dict[str, float] = {}
+        if mastery_fn is not None and rows:
+            history = [(int(r["kc_id"]), int(r["correct"])) for r in rows][-64:]
+            for kc in kc_stats:
+                try:
+                    mastery_vals[kc] = float(mastery_fn(kc, history))
+                except Exception:
+                    pass
 
         if kc_stats:
-            parts.append(_learning_map_svg(kc_stats, names))
+            parts.append(_learning_map_svg(kc_stats, names, mastery_vals))
+            m_head = "<th>Mastery (model)</th><th>Status</th>" if mastery_vals else ""
             parts.append("<h2>Knowledge components</h2><table>"
-                         "<tr><th>Concept</th><th>Attempts</th><th>Accuracy</th></tr>")
+                         f"<tr><th>Concept</th><th>Attempts</th><th>Accuracy</th>{m_head}</tr>")
             for k in sorted(kc_stats, key=int):
                 s = kc_stats[k]
                 pct = round(100 * s["correct"] / s["attempts"])
                 cls = "bar" if pct >= 50 else "bar miss"
                 label = html.escape(names.get(k, f"KC {k}"))
+                m_cells = ""
+                if mastery_vals:
+                    if k in mastery_vals:
+                        mp = round(100 * mastery_vals[k])
+                        status, scls = _status(mastery_vals[k])
+                        m_cells = (f"<td>{mp}%</td>"
+                                   f"<td><span class='{scls}'>{status}</span></td>")
+                    else:
+                        m_cells = "<td>-</td><td>-</td>"
                 parts.append(f"<tr><td>{label} <small>(KC {k})</small></td>"
                              f"<td>{s['attempts']}</td>"
-                             f"<td><span class='{cls}'>{pct}%</span></td></tr>")
+                             f"<td><span class='{cls}'>{pct}%</span></td>{m_cells}</tr>")
             parts.append("</table>")
+            if mastery_vals:
+                parts.append("<p><small>Mastery is the local AKT model's predicted "
+                             "probability of answering a new question on that concept "
+                             "correctly, given your full history. mastered &ge; 80%, "
+                             "learning 40-79%, needs work &lt; 40%.</small></p>")
             parts.append("<h2>Outcome history</h2><p>" + " ".join(
                 "&#9679;" if int(r["correct"]) else "&#9675;" for r in rows) +
                 "<br><small>&#9679; correct &nbsp; &#9675; incorrect (chronological)</small></p>")
