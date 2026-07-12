@@ -131,6 +131,19 @@ document.querySelectorAll('circle.kc').forEach(c => c.addEventListener('click', 
             f"Node size = attempts, color = accuracy.</small></div>{script}")
 
 
+def _kt_model_line(root: Path) -> str:
+    """One-line description of the KT model in use."""
+    ckpt = root / "kt" / "models" / "akt.pt"
+    if ckpt.exists():
+        import datetime
+        ts = datetime.datetime.fromtimestamp(ckpt.stat().st_mtime).strftime("%Y-%m-%d %H:%M")
+        return ("<br><small>KT model: AKT (attentive knowledge tracing; 2-layer "
+                f"transformer, d=64), local checkpoint trained {ts}. Retrain: "
+                "<code>python3 -m kt.train</code></small>")
+    return ("<br><small>KT model: none trained yet; mastery falls back to recent "
+            "accuracy. Train after ~20 outcomes: <code>python3 -m kt.train</code></small>")
+
+
 def _default_mastery_fn(root: Path):
     """Model-backed mastery: P(correct) for each KC given the full history.
     Returns None when no trained checkpoint exists (dashboard degrades softly)."""
@@ -178,6 +191,18 @@ def build_dashboard(root: Path | str, out_path: Path | str | None = None,
              f"<style>{_STYLE}</style></head><body><div class='wrap'>",
              "<h1>Learning dashboard</h1>"
              "<div class='sub'>oh-my-brain &middot; everything below stays on this machine</div>"]
+    try:
+        from harness.debt_status import compute_status, render_bar
+        st = compute_status(root)
+        pct = round(100 * st["repay_ratio"])
+        parts.append(
+            "<div class='card'><b>Cognitive debt</b><br>"
+            f"<span class='meter' style='width:220px'><i style='width:{pct}%'></i></span> "
+            f"<b>{st['outstanding']}</b> outstanding &middot; repaid {st['repaid']}/{st['accrued']} ({pct}%)"
+            "<br><small>accrued = prompts flagged as blind delegation; repaid = correct learning-check answers</small>"
+            + _kt_model_line(root) + "</div>")
+    except Exception:
+        pass
 
     if not prompts and not rows:
         parts.append("<p>No data yet. Use the harness for a while and regenerate.</p>")

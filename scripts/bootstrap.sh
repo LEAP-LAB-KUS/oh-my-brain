@@ -19,6 +19,9 @@ if ! "$PY" -c "import torch" 2>/dev/null; then
   echo "               $PY -m pip install torch numpy openai"
 fi
 
+# 2.5 seed the named KC catalog (idempotent)
+"$PY" -c "import sys; sys.path.insert(0,'.'); from kt.kc_catalog import seed_store; print('[oh-my-brain] KC catalog:', seed_store('kt/data/kc.json'), 'concepts')" || true
+
 # 3. hook self-test (same fail-open path codex will call)
 echo '{"session_id":"bootstrap","cwd":"'"$ROOT"'","hook_event_name":"UserPromptSubmit","prompt":"bootstrap self-test because we verify the hook works"}' \
   | "$PY" .codex/hooks/on_user_prompt.py --log-dir logs >/dev/null

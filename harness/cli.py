@@ -26,6 +26,7 @@ def main(argv: list[str] | None = None) -> int:
     lp.add_argument("--log-dir", default="logs")
 
     sub.add_parser("assess")
+    sub.add_parser("status")
 
     gr = sub.add_parser("grade")
     gr.add_argument("--user", required=True)
@@ -46,6 +47,15 @@ def main(argv: list[str] | None = None) -> int:
     elif args.cmd == "assess":
         r = score_prompt(sys.stdin.read())
         print(json.dumps({"score": r.score, "trigger": r.trigger, "dimensions": r.dimensions}))
+    elif args.cmd == "status":
+        from pathlib import Path as _P
+
+        from harness.debt_status import compute_status, render_bar
+        print(render_bar(compute_status(_P.cwd())))
+        ckpt = _P.cwd() / "kt" / "models" / "akt.pt"
+        print("KT model: AKT (2-layer transformer, d=64), checkpoint kt/models/akt.pt"
+              if ckpt.exists() else
+              "KT model: not trained yet (mastery = recent accuracy); train with python3 -m kt.train")
     elif args.cmd == "grade":
         state = Path(args.state_dir)
         store = KCStore(state / "kc.json")

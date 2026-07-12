@@ -70,7 +70,11 @@ def _slug(title: str) -> str:
 def build_material_page(root: Path | str, *, title: str, kc: str, body_html: str,
                         image: str | None = None, video: str | None = None,
                         questions: list[str] | None = None,
-                        interactive_html: str | None = None) -> Path:
+                        interactive_html: str | None = None,
+                        quiz_items: list[dict] | None = None) -> Path:
+    """quiz_items: [{"q": str, "choices": [str,...], "answer_idx": int}] renders a
+    clickable quiz whose outcomes POST to the local study server (/record) and
+    land in the learner record like agent-graded answers."""
     root = Path(root)
     out_dir = root / "learning" / "materials"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -88,6 +92,32 @@ def build_material_page(root: Path | str, *, title: str, kc: str, body_html: str
         interactive = (f"<div class='card interactive'><h2>Try it</h2>"
                        f"{interactive_html}</div>")
 
+    quiz = ""
+    if quiz_items:
+        import json as _json
+        quiz = ("<div class='card selfcheck'><h2>Quiz (recorded)</h2><div id='omb-quiz'></div>"
+                "<div id='omb-quiz-msg'><small>Pick an answer; your result is saved to "
+                "your learner record when the study server is running "
+                "(python3 -m harness.study_server).</small></div>"
+                f"<script>const OMBQ={_json.dumps(quiz_items)};const KCN={_json.dumps(kc)};" + """
+const qroot=document.getElementById('omb-quiz'),qmsg=document.getElementById('omb-quiz-msg');
+OMBQ.forEach((it,qi)=>{const d=document.createElement('div');
+ d.innerHTML='<p><b>Q'+(qi+1)+'.</b> '+it.q+'</p>';
+ it.choices.forEach((c,ci)=>{const b=document.createElement('button');
+  b.textContent=c; b.style.margin='3px';
+  b.onclick=async()=>{const ok=ci===it.answer_idx?1:0;
+   d.querySelectorAll('button').forEach(x=>x.disabled=true);
+   b.style.outline=ok?'3px solid #10a37f':'3px solid #ef4146';
+   try{await fetch('/record',{method:'POST',headers:{'Content-Type':'application/json'},
+     body:JSON.stringify({kc_hint:KCN,question:it.q,correct:ok})});
+     qmsg.innerHTML='<small>Saved to your learner record ('+(ok?'correct':'incorrect')+'). '+
+       (ok?'Nice.':'The agent will follow up with material on this.')+'</small>';}
+   catch(e){qmsg.innerHTML='<small>Answered '+(ok?'correctly':'incorrectly')+
+     ' - not saved (start: python3 -m harness.study_server).</small>';}};
+  d.appendChild(b);});
+ qroot.appendChild(d);});
+</script>""" + "</div>")
+
     selfcheck = ""
     if questions:
         items = "".join(f"<li>{html.escape(q)}</li>" for q in questions)
@@ -100,5 +130,5 @@ def build_material_page(root: Path | str, *, title: str, kc: str, body_html: str
     out.write_text(_TEMPLATE.format(
         title=html.escape(title), kc=html.escape(kc),
         media=media, body=body_html, interactive=interactive,
-        selfcheck=selfcheck), encoding="utf-8")
+        selfcheck=quiz + selfcheck), encoding="utf-8")
     return out
