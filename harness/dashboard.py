@@ -192,7 +192,10 @@ def build_dashboard(root: Path | str, out_path: Path | str | None = None,
             s["recent"] = " ".join("O" if int(r["correct"]) else "X" for r in tail)
         mastery_vals: dict[str, float] = {}
         if mastery_fn is not None and rows:
-            history = [(int(r["kc_id"]), int(r["correct"])) for r in rows][-64:]
+            # history must be ONE learner's sequence; use the most recent user_id
+            last_user = rows[-1].get("user_id")
+            user_rows = [r for r in rows if r.get("user_id") == last_user] or rows
+            history = [(int(r["kc_id"]), int(r["correct"])) for r in user_rows][-64:]
             for kc in kc_stats:
                 try:
                     mastery_vals[kc] = float(mastery_fn(kc, history))
