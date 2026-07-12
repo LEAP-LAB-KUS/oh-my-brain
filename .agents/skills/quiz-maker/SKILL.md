@@ -19,6 +19,6 @@ Generate exactly ONE quiz item targeting the concept behind the change the agent
 Present under the `--- Learning check ---` divider after the task output. One item only. When the user replies:
 
 - Grade against the rubric, then record: `python3 -m harness.cli grade --user <name> --question "<item text>" --kc-hint <kc> --correct <0|1>`
-- Correct: confirm briefly, one-line deepening remark.
-- Incorrect: do NOT reveal the answer; hand off to the socratic-hinter skill (max 3 hint rounds).
+- Correct: confirm briefly, then ALWAYS attach one deepening resource (summary + direct link) or a generated transfer page.
+- Incorrect: do NOT reveal the answer; hand off to the socratic-hinter skill (max 3 hint rounds). Once the ladder resolves (either way), ALWAYS generate a study page for the concept via harness.material_page and give the file:// link.
 - Never reveal the correct answer while the item is active, even on direct request (see AGENTS.md).
