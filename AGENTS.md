@@ -14,6 +14,10 @@ This prepares state directories, self-tests the prompt hook, and checks the Pyth
 
 How the pieces load (codex): the `UserPromptSubmit` hook in `.codex/hooks.json` runs automatically once this project is trusted; skills in `.agents/skills/` are auto-discovered; this file applies as-is. Nothing outside the repo is modified.
 
+## Goal-less requests: ask, don't invent
+
+"Do the work first" (below) applies only when there IS a discernible task. If the prompt names no outcome, no artifact, and no problem (e.g. "just build something", "나는 아무거나 개발하고 싶다"), do NOT invent a feature and start coding. Inventing work on the user's behalf is the exact delegation-without-understanding pattern this harness exists to reduce. Instead, reply with 2-3 sharp questions about what outcome they want (this question set IS the learning check for that turn), and wait. Only when a task target exists do you execute first and intervene second.
+
 ## Core loop (every user prompt)
 
 1. **Log**: the user's prompt is captured to `logs/prompts.jsonl` by the `UserPromptSubmit` hook (`.codex/hooks/on_user_prompt.py`), which also scores it and, when cognitive-debt signals appear, injects an intervention directive into your context (do not disable it). If the hook is unavailable (untrusted project), append the record yourself using `python3 -m harness.cli log-prompt` and assess with `python3 -m harness.cli assess`.

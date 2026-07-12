@@ -21,15 +21,20 @@ from dataclasses import dataclass
 
 _INTENT = re.compile(
     r"\b(because|so that|in order to|to (?:make|ensure|avoid|support)|goal|want|need"
-    r"|explain|why|understand|walk me through|how does)\b", re.I)  # understanding-seeking verbs ARE intent
+    r"|explain|why|understand|walk me through|how does)\b"
+    r"|위해|려고|하도록|목적|이유|왜|설명", re.I)  # understanding-seeking verbs ARE intent (ko incl.)
 _CONSTRAINTS = re.compile(
     r"\b(only|must|should|except|when|if|use|using|without|due to|caused by"
-    r"|so\b.*\b(grows|fails|leaks|breaks|crashes)|keeps?\b|leak|memory|bug is)\b", re.I)  # symptom/cause statements
-_VERIFICATION = re.compile(r"\b(test|verify|check|assert|pytest|expect|confirm|reproduce|minimal fix|show the)\b", re.I)
+    r"|so\b.*\b(grows|fails|leaks|breaks|crashes)|keeps?\b|leak|memory|bug is)\b"
+    r"|때문|경우|조건|만\s|말고|누수|메모리|버그", re.I)  # symptom/cause statements (ko incl.)
+_VERIFICATION = re.compile(
+    r"\b(test|verify|check|assert|pytest|expect|confirm|reproduce|minimal fix|show the)\b"
+    r"|테스트|검증|확인|재현", re.I)
 _TARGET = re.compile(r"(\.\w{1,4}\b|/|\b[a-z_]+\([)]?|`[^`]+`|\b(?:function|class|module|endpoint|file|line \d+)\b)", re.I)
 _ANSWER_SEEKING = re.compile(r"\b(what'?s the answer|just tell me|give me the answer|정답|답 알려)\b", re.I)
 _UNDERSTANDING_SEEKING = re.compile(
-    r"^\s*(explain|why|how (?:does|do|is|are|did))\b|\b(walk me through|help me understand|i want to understand)\b", re.I)
+    r"^\s*(explain|why|how (?:does|do|is|are|did))\b|\b(walk me through|help me understand|i want to understand)\b"
+    r"|^\s*왜\s|설명해|이해하고 싶|이해가 안", re.I)
 
 _WEIGHTS = {
     "states_intent": 0.25,

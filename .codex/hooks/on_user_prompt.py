@@ -53,7 +53,8 @@ def main() -> int:
             }) + "\n")
 
         if r.trigger:
-            missing = [k for k, v in r.dimensions.items() if not v and k != "answer_seeking"]
+            _modifiers = ("answer_seeking", "understanding_seeking")
+            missing = [k for k, v in r.dimensions.items() if not v and k not in _modifiers]
             ctx = (
                 f"[oh-my-brain] Cognitive-debt signal on this prompt "
                 f"(score {r.score:.2f}; missing: {', '.join(missing)}). "
