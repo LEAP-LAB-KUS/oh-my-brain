@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"$(git rev-parse --show-toplevel)/.codex/hooks/on_user_prompt.py\"",
+            "command": "OMB_JUDGE=${OMB_JUDGE:-llm} python3 \"$(git rev-parse --show-toplevel)/.codex/hooks/on_user_prompt.py\"",
             "timeout": 10,
             "statusMessage": "oh-my-brain: assessing prompt"
           }
