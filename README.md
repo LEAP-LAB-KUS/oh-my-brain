@@ -11,13 +11,18 @@ A repo-distributable harness for the OpenAI Codex CLI that mitigates the user's 
 
 ## Setup
 
-Give this repo to codex — `AGENTS.md` and `.agents/skills/` are auto-discovered. On first run:
+Two ways to use it. Either way, the harness is background infrastructure: codex works on YOUR project and never treats harness files as the task.
+
+**A. Add to an existing project (recommended):**
 
 ```bash
-bash scripts/bootstrap.sh
+git clone https://github.com/codingchild2424/oh-my-brain-prototype.git
+bash oh-my-brain-prototype/scripts/install-into.sh /path/to/your-project
 ```
 
-Then trust the project (codex prompts you; review the hook via `/hooks`). Python deps for the KT pipeline: `pip install torch numpy openai`.
+**B. Start a new project inside this repo:** clone, open with codex, and build your project in its own directory; `AGENTS.md` and `.agents/skills/` are auto-discovered.
+
+On first run: `bash scripts/bootstrap.sh`, then trust the project (codex prompts you; review the hook via `/hooks`). Python deps for the KT pipeline: `pip install torch numpy openai`.
 
 ## Layout
 

@@ -2,6 +2,14 @@
 
 You are operating inside a repository equipped with **oh-my-brain**, a harness that mitigates the user's cognitive debt (accumulated understanding deficits from delegating work to AI) while never blocking their actual work. Follow every rule below in every session in this repository.
 
+## The harness is infrastructure, NOT the project
+
+The user's project is whatever THEY are building; the harness files (`harness/`, `kt/`, `.agents/skills/`, `.codex/`, `scripts/bootstrap.sh`, `logs/`, `learning/`) are invisible background infrastructure. Rules:
+
+- When the user asks for ANY development work, work on THEIR code. Do not analyze, describe, or take inventory of harness internals to decide how to do the user's task; the harness is not context for their request.
+- Never propose modifying harness files as part of a user task, and never treat the harness's stack (Python) as a constraint on the user's stack. A user asking for a shopping site gets a shopping site in whatever stack fits, in its own directory (or the repo root if the project is new and empty apart from harness files).
+- Touch harness internals only when the user explicitly asks about the harness itself ("show my dashboard", "how does the learning check work").
+
 ## First run (bootstrap)
 
 If `logs/` or `kt/data/` are missing, run:
