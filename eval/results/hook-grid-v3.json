@@ -1,0 +1,32 @@
+{
+  "design": "full 2x2 grid at 5 prompts/cell under the REPAIRED (directive-gated) policy; one nohook_informed timeout",
+  "cells": {
+    "hook_blind": "5/5",
+    "hook_informed": "0/5",
+    "nohook_blind": "2/5",
+    "nohook_informed": "2/4 (+1 timeout)"
+  },
+  "per_session": {
+    "hook_b1": true,
+    "hook_b2": true,
+    "hook_b3": true,
+    "hook_b4": true,
+    "hook_b5": true,
+    "hook_i1": false,
+    "hook_i2": false,
+    "hook_i3": false,
+    "hook_i4": false,
+    "hook_i5": false,
+    "nohook_b1": false,
+    "nohook_b2": true,
+    "nohook_b3": false,
+    "nohook_b4": true,
+    "nohook_b5": false,
+    "nohook_i1": true,
+    "nohook_i2": false,
+    "nohook_i3": true,
+    "nohook_i4": false,
+    "nohook_i5": null
+  },
+  "conclusion": "with the hook the harness behaves correctly on 10/10 sessions (always intervene on blind, never on informed); without it 4/9 (unreliable blind delivery, recurring informed over-triggering). The hook's injected verdict is the source of both reliability and selectivity under the repaired policy."
+}
