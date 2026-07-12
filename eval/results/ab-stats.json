@@ -1,0 +1,19 @@
+{
+  "effective_n_personas": 8,
+  "per_persona_delta": {
+    "novice_cautious": -0.1,
+    "novice_hasty": 0.1,
+    "intermediate_steady": 0.6,
+    "intermediate_overconfident": 0.0,
+    "advanced_rusty": -0.5,
+    "advanced_sharp": 0.1,
+    "selfTaught_patchy": -0.3,
+    "returner_deliberate": -0.6
+  },
+  "mean_delta": -0.087,
+  "permutation_p_two_sided": 0.6094,
+  "bootstrap_95ci": [
+    -0.325,
+    0.175
+  ]
+}

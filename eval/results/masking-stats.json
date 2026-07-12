@@ -1,0 +1,20 @@
+{
+  "masked_mean": 0.5,
+  "visible_mean": 0.312,
+  "per_persona_masked_minus_visible": {
+    "novice_cautious": 0.1,
+    "novice_hasty": -0.2,
+    "intermediate_steady": -0.2,
+    "intermediate_overconfident": 0.1,
+    "advanced_rusty": 0.6,
+    "advanced_sharp": 0.0,
+    "selfTaught_patchy": 0.4,
+    "returner_deliberate": 0.7
+  },
+  "mean_delta": 0.188,
+  "permutation_p": 0.2188,
+  "bootstrap_95ci": [
+    -0.025,
+    0.413
+  ]
+}

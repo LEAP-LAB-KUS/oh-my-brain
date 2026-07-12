@@ -1,0 +1,7 @@
+{
+  "train_users": 16,
+  "test_users": 8,
+  "test_interactions": 192,
+  "test_base_rate": 0.438,
+  "holdout_auc": 0.701
+}

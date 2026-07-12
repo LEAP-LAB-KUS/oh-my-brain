@@ -1,0 +1,43 @@
+{
+  "n": 40,
+  "tp": 20,
+  "fp": 8,
+  "tn": 12,
+  "fn": 0,
+  "precision": 0.714,
+  "recall": 1.0,
+  "errors": [
+    [
+      "FP",
+      "Rename get_user to fetch_user in api/users.py and update the two call sites in views.py"
+    ],
+    [
+      "FP",
+      "Explain why the session token expires early when the container timezone is UTC"
+    ],
+    [
+      "FP",
+      "Why does test_checkout fail only when run after test_inventory? I suspect shared fixture state"
+    ],
+    [
+      "FP",
+      "Walk me through how the middleware chain handles a 401 before I change the auth code"
+    ],
+    [
+      "FP",
+      "Migrate config parsing from ini to toml, keeping backwards compatibility for the [db] section only"
+    ],
+    [
+      "FP",
+      "The date parser breaks on ISO week dates like 2026-W28; add support and a regression test"
+    ],
+    [
+      "FP",
+      "Add pagination to GET /orders with limit and offset params, defaulting to 50, and update the OpenAPI spec"
+    ],
+    [
+      "FP",
+      "Split UserService.create into validation and persistence steps so the validation can run in the API layer too"
+    ]
+  ]
+}
