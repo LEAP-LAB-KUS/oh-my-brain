@@ -12,7 +12,7 @@
       -0.025,
       0.413
     ],
-    "sign_split": "5+/2-/10",
+    "sign_split": "5+/2-/1 zero",
     "per_persona_delta": {
       "novice_cautious": 0.1,
       "novice_hasty": -0.2,
@@ -31,7 +31,7 @@
       0.013,
       0.2
     ],
-    "sign_split": "6+/1-/10",
+    "sign_split": "6+/1-/1 zero",
     "per_persona_delta": {
       "novice_cautious": 0.0,
       "novice_hasty": -0.1,
@@ -50,7 +50,7 @@
       -0.325,
       0.175
     ],
-    "sign_split": "3+/4-/10",
+    "sign_split": "3+/4-/1 zero",
     "per_persona_delta": {
       "novice_cautious": -0.1,
       "novice_hasty": 0.1,
