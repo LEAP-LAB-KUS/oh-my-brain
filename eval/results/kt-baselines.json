@@ -1,7 +1,9 @@
 {
   "round_held_out": {
     "akt_auc": 0.708,
-    "per_kc_baseline_auc": 0.66
+    "per_kc_baseline_auc": 0.66,
+    "user_running_mean_auc": 0.622,
+    "hybrid_user_kc_auc": 0.609
   },
   "persona_held_out": {
     "held_out": [
@@ -9,6 +11,8 @@
       "advanced_rusty"
     ],
     "akt_auc": 0.805,
-    "per_kc_baseline_auc": 0.657
+    "per_kc_baseline_auc": 0.657,
+    "user_running_mean_auc": 0.582,
+    "hybrid_user_kc_auc": 0.6
   }
 }

@@ -1,0 +1,23 @@
+{
+  "model": "solar-mini zero-shot, temperature 0",
+  "results": [
+    {
+      "corpus": "corpus1-dev",
+      "tp": 20,
+      "fp": 0,
+      "tn": 20,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "corpus": "corpus2-fresh",
+      "tp": 14,
+      "fp": 0,
+      "tn": 25,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.933
+    }
+  ]
+}
