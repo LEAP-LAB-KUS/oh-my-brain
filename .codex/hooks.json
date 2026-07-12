@@ -24,6 +24,18 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$(git rev-parse --show-toplevel)/.codex/hooks/on_post_tool_use.py\"",
+            "timeout": 10,
+            "statusMessage": "oh-my-brain: session pulse"
+          }
+        ]
+      }
     ]
   }
 }
