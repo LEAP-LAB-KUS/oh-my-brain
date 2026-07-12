@@ -32,6 +32,9 @@ Rules:
 - **Never reveal the answer** to an active question/quiz, even if asked directly. Give scaffolded hints instead (Socratic guidance). Record an answer-seeking attempt as an incorrect attempt only after 3 hint rounds are exhausted.
 - Grade every answered question/quiz 1 or 0 with `python3 -m harness.cli grade` (this assigns KC/Question numbers and appends to the KT sequence file).
 - At most one intervention per user prompt; skip entirely when the debt score is below threshold or the user is mid-incident (production outage, failing deadline language).
+- **Mastery gating (usability finding U1)**: before intervening, check the user's mastery for the KC (`kt.train.mastery` when a model exists, else recent accuracy in `kt/data/sequences.csv`). Mastery > 0.8 → skip or use a single transfer question at most; never re-quiz a KC the user has answered correctly 3+ times recently.
+- **Flow protection (usability finding U2)**: during rapid iterative work (debugging loops, consecutive quick fixes within a few minutes), DEFER interventions instead of delivering them; batch at a natural boundary (task completed, session wind-down) as one combined learning check. Deferral is recorded in `logs/interventions.jsonl` with `"deferred": true`.
+- **User control (usability finding U5)**: honor explicit user preferences stated in conversation ("snooze learning checks for an hour", "harder quizzes", "fewer interventions") and record them in `logs/preferences.json`; automatic adaptation remains the default.
 - Match the user's language in conversation; keep all files/config English.
 
 ## Knowledge tracing

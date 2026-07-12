@@ -1,41 +1,41 @@
 {
   "summary": {
-    "harness_mean": 0.312,
-    "control_mean": 0.4,
-    "delta": -0.088,
+    "harness_mean": 0.4,
+    "control_mean": 0.463,
+    "delta": -0.062,
     "n_per_arm": 16,
     "per_persona": {
       "novice_cautious": {
-        "harness": 0.0,
-        "control": 0.1
+        "harness": 0.3,
+        "control": 0.2
       },
       "novice_hasty": {
-        "harness": 0.2,
-        "control": 0.1
+        "harness": 0.3,
+        "control": 0.3
       },
       "intermediate_steady": {
-        "harness": 0.6,
-        "control": 0.0
+        "harness": 0.2,
+        "control": 0.4
       },
       "intermediate_overconfident": {
-        "harness": 0.2,
+        "harness": 0.4,
         "control": 0.2
       },
       "advanced_rusty": {
-        "harness": 0.4,
-        "control": 0.9
+        "harness": 0.6,
+        "control": 1.0
       },
       "advanced_sharp": {
-        "harness": 0.9,
-        "control": 0.8
+        "harness": 0.6,
+        "control": 0.7
       },
       "selfTaught_patchy": {
-        "harness": 0.1,
-        "control": 0.4
+        "harness": 0.6,
+        "control": 0.6
       },
       "returner_deliberate": {
-        "harness": 0.1,
-        "control": 0.7
+        "harness": 0.2,
+        "control": 0.3
       }
     }
   },
@@ -46,20 +46,20 @@
       "skill": 0.2,
       "condition": "harness",
       "intervention_answers": [
-        0,
-        0,
-        0,
-        0,
-        0
+        1,
+        1,
+        1,
+        1,
+        1
       ],
       "posttest_answers": [
         0,
         0,
-        0,
+        1,
         0,
         0
       ],
-      "posttest_accuracy": 0.0
+      "posttest_accuracy": 0.2
     },
     {
       "persona": "novice_cautious",
@@ -71,10 +71,10 @@
         1,
         0,
         0,
-        0,
+        1,
         0
       ],
-      "posttest_accuracy": 0.2
+      "posttest_accuracy": 0.4
     },
     {
       "persona": "novice_hasty",
@@ -82,16 +82,16 @@
       "skill": 0.25,
       "condition": "harness",
       "intervention_answers": [
-        0,
-        0,
-        0,
-        0,
-        0
+        1,
+        1,
+        1,
+        1,
+        1
       ],
       "posttest_answers": [
+        0,
+        0,
         1,
-        0,
-        0,
         0,
         0
       ],
@@ -104,13 +104,13 @@
       "condition": "control",
       "intervention_answers": [],
       "posttest_answers": [
-        0,
+        1,
         0,
         0,
         0,
         0
       ],
-      "posttest_accuracy": 0.0
+      "posttest_accuracy": 0.2
     },
     {
       "persona": "intermediate_steady",
@@ -118,15 +118,87 @@
       "skill": 0.5,
       "condition": "harness",
       "intervention_answers": [
-        0,
         1,
-        0,
         1,
-        0
+        1,
+        1,
+        1
       ],
       "posttest_answers": [
         1,
         0,
+        0,
+        1,
+        0
+      ],
+      "posttest_accuracy": 0.4
+    },
+    {
+      "persona": "intermediate_steady",
+      "rep": 0,
+      "skill": 0.5,
+      "condition": "control",
+      "intervention_answers": [],
+      "posttest_answers": [
+        1,
+        0,
+        0,
+        1,
+        0
+      ],
+      "posttest_accuracy": 0.4
+    },
+    {
+      "persona": "intermediate_overconfident",
+      "rep": 0,
+      "skill": 0.45,
+      "condition": "harness",
+      "intervention_answers": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "posttest_answers": [
+        0,
+        1,
+        1,
+        0,
+        1
+      ],
+      "posttest_accuracy": 0.6
+    },
+    {
+      "persona": "intermediate_overconfident",
+      "rep": 0,
+      "skill": 0.45,
+      "condition": "control",
+      "intervention_answers": [],
+      "posttest_answers": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "posttest_accuracy": 0.2
+    },
+    {
+      "persona": "advanced_rusty",
+      "rep": 0,
+      "skill": 0.7,
+      "condition": "harness",
+      "intervention_answers": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "posttest_answers": [
+        0,
+        1,
         1,
         1,
         1
@@ -134,78 +206,6 @@
       "posttest_accuracy": 0.8
     },
     {
-      "persona": "intermediate_steady",
-      "rep": 0,
-      "skill": 0.5,
-      "condition": "control",
-      "intervention_answers": [],
-      "posttest_answers": [
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "posttest_accuracy": 0.0
-    },
-    {
-      "persona": "intermediate_overconfident",
-      "rep": 0,
-      "skill": 0.45,
-      "condition": "harness",
-      "intervention_answers": [
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "posttest_answers": [
-        1,
-        0,
-        0,
-        0,
-        0
-      ],
-      "posttest_accuracy": 0.2
-    },
-    {
-      "persona": "intermediate_overconfident",
-      "rep": 0,
-      "skill": 0.45,
-      "condition": "control",
-      "intervention_answers": [],
-      "posttest_answers": [
-        0,
-        1,
-        0,
-        0,
-        0
-      ],
-      "posttest_accuracy": 0.2
-    },
-    {
-      "persona": "advanced_rusty",
-      "rep": 0,
-      "skill": 0.7,
-      "condition": "harness",
-      "intervention_answers": [
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      "posttest_answers": [
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "posttest_accuracy": 0.0
-    },
-    {
       "persona": "advanced_rusty",
       "rep": 0,
       "skill": 0.7,
@@ -234,12 +234,12 @@
       ],
       "posttest_answers": [
         1,
+        0,
+        0,
         1,
-        1,
-        1,
-        1
+        0
       ],
-      "posttest_accuracy": 1.0
+      "posttest_accuracy": 0.4
     },
     {
       "persona": "advanced_sharp",
@@ -248,10 +248,31 @@
       "condition": "control",
       "intervention_answers": [],
       "posttest_answers": [
-        1,
+        0,
         0,
         1,
         0,
+        1
+      ],
+      "posttest_accuracy": 0.4
+    },
+    {
+      "persona": "selfTaught_patchy",
+      "rep": 0,
+      "skill": 0.55,
+      "condition": "harness",
+      "intervention_answers": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "posttest_answers": [
+        1,
+        0,
+        0,
+        1,
         1
       ],
       "posttest_accuracy": 0.6
@@ -260,85 +281,28 @@
       "persona": "selfTaught_patchy",
       "rep": 0,
       "skill": 0.55,
-      "condition": "harness",
-      "intervention_answers": [
-        0,
-        1,
-        0,
-        1,
-        0
-      ],
-      "posttest_answers": [
-        1,
-        0,
-        0,
-        0,
-        0
-      ],
-      "posttest_accuracy": 0.2
-    },
-    {
-      "persona": "selfTaught_patchy",
-      "rep": 0,
-      "skill": 0.55,
-      "condition": "control",
-      "intervention_answers": [],
-      "posttest_answers": [
-        0,
-        0,
-        1,
-        0,
-        1
-      ],
-      "posttest_accuracy": 0.4
-    },
-    {
-      "persona": "returner_deliberate",
-      "rep": 0,
-      "skill": 0.6,
-      "condition": "harness",
-      "intervention_answers": [
-        1,
-        1,
-        0,
-        1,
-        0
-      ],
-      "posttest_answers": [
-        1,
-        0,
-        0,
-        0,
-        0
-      ],
-      "posttest_accuracy": 0.2
-    },
-    {
-      "persona": "returner_deliberate",
-      "rep": 0,
-      "skill": 0.6,
       "condition": "control",
       "intervention_answers": [],
       "posttest_answers": [
         1,
         0,
-        1,
         0,
+        1,
         1
       ],
       "posttest_accuracy": 0.6
     },
     {
-      "persona": "novice_cautious",
-      "rep": 1,
-      "skill": 0.2,
+      "persona": "returner_deliberate",
+      "rep": 0,
+      "skill": 0.6,
       "condition": "harness",
       "intervention_answers": [
-        0,
-        0,
-        0,
-        0,
-        0
+        1,
+        1,
+        1,
+        1,
+        1
       ],
       "posttest_answers": [
         0,
@@ -348,6 +312,42 @@
         0
       ],
       "posttest_accuracy": 0.0
+    },
+    {
+      "persona": "returner_deliberate",
+      "rep": 0,
+      "skill": 0.6,
+      "condition": "control",
+      "intervention_answers": [],
+      "posttest_answers": [
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      "posttest_accuracy": 0.4
+    },
+    {
+      "persona": "novice_cautious",
+      "rep": 1,
+      "skill": 0.2,
+      "condition": "harness",
+      "intervention_answers": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "posttest_answers": [
+        1,
+        0,
+        0,
+        1,
+        0
+      ],
+      "posttest_accuracy": 0.4
     },
     {
       "persona": "novice_cautious",
@@ -370,20 +370,20 @@
       "skill": 0.25,
       "condition": "harness",
       "intervention_answers": [
-        0,
-        0,
-        0,
-        0,
-        0
+        1,
+        1,
+        1,
+        1,
+        1
       ],
       "posttest_answers": [
+        0,
+        0,
         1,
         0,
-        0,
-        0,
-        0
+        1
       ],
-      "posttest_accuracy": 0.2
+      "posttest_accuracy": 0.4
     },
     {
       "persona": "novice_hasty",
@@ -394,27 +394,6 @@
       "posttest_answers": [
         1,
         0,
-        0,
-        0,
-        0
-      ],
-      "posttest_accuracy": 0.2
-    },
-    {
-      "persona": "intermediate_steady",
-      "rep": 1,
-      "skill": 0.5,
-      "condition": "harness",
-      "intervention_answers": [
-        0,
-        1,
-        0,
-        1,
-        0
-      ],
-      "posttest_answers": [
-        0,
-        1,
         0,
         1,
         0
@@ -425,8 +404,14 @@
       "persona": "intermediate_steady",
       "rep": 1,
       "skill": 0.5,
-      "condition": "control",
-      "intervention_answers": [],
+      "condition": "harness",
+      "intervention_answers": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
       "posttest_answers": [
         0,
         0,
@@ -437,21 +422,36 @@
       "posttest_accuracy": 0.0
     },
     {
+      "persona": "intermediate_steady",
+      "rep": 1,
+      "skill": 0.5,
+      "condition": "control",
+      "intervention_answers": [],
+      "posttest_answers": [
+        1,
+        0,
+        0,
+        1,
+        0
+      ],
+      "posttest_accuracy": 0.4
+    },
+    {
       "persona": "intermediate_overconfident",
       "rep": 1,
       "skill": 0.45,
       "condition": "harness",
       "intervention_answers": [
-        0,
-        0,
-        0,
-        0,
-        0
+        1,
+        1,
+        1,
+        1,
+        1
       ],
       "posttest_answers": [
+        0,
+        0,
         1,
-        0,
-        0,
         0,
         0
       ],
@@ -485,13 +485,13 @@
         1
       ],
       "posttest_answers": [
-        1,
-        1,
+        0,
+        0,
         1,
         1,
         0
       ],
-      "posttest_accuracy": 0.8
+      "posttest_accuracy": 0.4
     },
     {
       "persona": "advanced_rusty",
@@ -504,9 +504,9 @@
         1,
         1,
         1,
-        0
+        1
       ],
-      "posttest_accuracy": 0.8
+      "posttest_accuracy": 1.0
     },
     {
       "persona": "advanced_sharp",
@@ -521,10 +521,10 @@
         1
       ],
       "posttest_answers": [
+        1,
+        1,
+        1,
         0,
-        1,
-        1,
-        1,
         1
       ],
       "posttest_accuracy": 0.8
@@ -550,20 +550,20 @@
       "skill": 0.55,
       "condition": "harness",
       "intervention_answers": [
-        0,
         1,
-        0,
         1,
-        0
+        1,
+        1,
+        1
       ],
       "posttest_answers": [
+        1,
         0,
         0,
-        0,
-        0,
-        0
+        1,
+        1
       ],
-      "posttest_accuracy": 0.0
+      "posttest_accuracy": 0.6
     },
     {
       "persona": "selfTaught_patchy",
@@ -572,13 +572,13 @@
       "condition": "control",
       "intervention_answers": [],
       "posttest_answers": [
-        0,
         1,
         0,
+        0,
         1,
-        0
+        1
       ],
-      "posttest_accuracy": 0.4
+      "posttest_accuracy": 0.6
     },
     {
       "persona": "returner_deliberate",
@@ -586,20 +586,20 @@
       "skill": 0.6,
       "condition": "harness",
       "intervention_answers": [
-        0,
         1,
-        0,
         1,
-        0
+        1,
+        1,
+        1
       ],
       "posttest_answers": [
         0,
         0,
+        1,
         0,
-        0,
-        0
+        1
       ],
-      "posttest_accuracy": 0.0
+      "posttest_accuracy": 0.4
     },
     {
       "persona": "returner_deliberate",
@@ -608,13 +608,13 @@
       "condition": "control",
       "intervention_answers": [],
       "posttest_answers": [
-        1,
         0,
         1,
-        1,
-        1
+        0,
+        0,
+        0
       ],
-      "posttest_accuracy": 0.8
+      "posttest_accuracy": 0.2
     }
   ]
 }

@@ -24,14 +24,15 @@ from pathlib import Path
 from kt.dummy_gen import PERSONAS
 from kt.question_bank import QUESTIONS
 
-# work tasks cover KCs 1,2,4,5,6; intervention quiz = bank item of same KC
+# work tasks cover KCs 1,2,4,5,6; intervention quiz = bank item of same KC,
+# medium difficulty so low-skill personas actually miss some (hint experience)
 TASKS = [
     {"kc_id": 1, "task": "Refactor a config loader that mutates a default dict argument.",
-     "quiz": next(q for q in QUESTIONS if q["q_id"] == 2)},
+     "quiz": next(q for q in QUESTIONS if q["q_id"] == 3)},
     {"kc_id": 2, "task": "Add a lock around a shared counter in a threaded worker pool.",
-     "quiz": next(q for q in QUESTIONS if q["q_id"] == 5)},
+     "quiz": next(q for q in QUESTIONS if q["q_id"] == 7)},
     {"kc_id": 4, "task": "Speed up a slow lookup by replacing a list scan with binary search.",
-     "quiz": next(q for q in QUESTIONS if q["q_id"] == 13)},
+     "quiz": next(q for q in QUESTIONS if q["q_id"] == 14)},
     {"kc_id": 5, "task": "Write a regression test for an off-by-one bug you just fixed.",
      "quiz": next(q for q in QUESTIONS if q["q_id"] == 18)},
     {"kc_id": 6, "task": "Rebase a feature branch onto main and resolve one conflict.",
@@ -39,7 +40,7 @@ TASKS = [
 ]
 
 # unaided post-test: different items, same KCs
-POSTTEST = [q for q in QUESTIONS if q["q_id"] in (3, 6, 14, 19, 23)]
+POSTTEST = [q for q in QUESTIONS if q["q_id"] in (4, 6, 15, 19, 23)]
 
 
 def build_conditions() -> list[dict]:
@@ -76,8 +77,9 @@ def solar_session_llm(persona: dict, condition: str, tasks: list[dict], posttest
                 f"{header}\nYou just completed this coding task with an AI agent: "
                 f"{t['task']}\nThe agent now asks a learning-check question: "
                 f"{q['text']} (difficulty {q['difficulty']:.1f}). "
-                "First line: 1 if this learner would answer correctly, else 0. "
-                "Second line: the learner's short answer (their actual reasoning)."
+                "Decide realistically whether THIS learner answers correctly - "
+                "low-skill learners frequently miss even moderate questions. "
+                "Reply in exactly this format:\nVERDICT: <0 or 1>\nANSWER: <the learner's short answer>"
             )
             bit = _first_bit(reply)
             answer_text = reply.split("\n", 1)[1].strip() if "\n" in reply else reply
@@ -116,7 +118,16 @@ def solar_session_llm(persona: dict, condition: str, tasks: list[dict], posttest
 
 
 def _first_bit(text: str) -> int:
-    m = re.search(r"[01]", text)
+    """Read the graded verdict: prefer an explicit VERDICT line, else the
+    first line consisting of a bare 0/1 (list numbering like '1.' is ignored)."""
+    m = re.search(r"VERDICT:\s*([01])", text)
+    if m:
+        return int(m.group(1))
+    for line in text.splitlines():
+        s = line.strip().rstrip(".")
+        if s in ("0", "1"):
+            return int(s)
+    m = re.search(r"\b[01]\b(?!\.)", text)
     return int(m.group(0)) if m else 0
 
 

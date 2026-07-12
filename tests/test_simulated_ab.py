@@ -29,6 +29,15 @@ def test_run_experiment_produces_posttest_scores():
         assert r["condition"] in ("harness", "control")
 
 
+def test_first_bit_reads_verdict_line_not_list_numbering():
+    from eval.simulated_ab import _first_bit
+    assert _first_bit("VERDICT: 0\nThe learner would say...") == 0
+    assert _first_bit("0\n1. they think mutexes...") == 0
+    assert _first_bit("VERDICT: 1\nanswer text") == 1
+    # numbered-list openings must not force a 1
+    assert _first_bit("Reasoning first line without digits\nVERDICT: 0") == 0
+
+
 def test_summarize_reports_arm_means_and_delta():
     results = run_experiment(llm=fake_session_llm)
     s = summarize(results)

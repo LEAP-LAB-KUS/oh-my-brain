@@ -7,6 +7,8 @@ description: Recommend one high-quality learning resource (summary + source link
 
 Recommend exactly ONE resource for the active KC gap. Quality bar: official docs, canonical books/papers, or widely trusted references (MDN, Python docs, Real Python, paper DOI). No SEO listicles.
 
+**Anchoring rule (usability finding U3)**: the resource must directly explain the mechanism in the user's OWN task (name the function/file/error from their session in your one-sentence tie-in). If you cannot articulate that link in one concrete sentence, do not recommend — ask a question instead. Never recommend a resource covering material the user's mastery record already shows they know.
+
 Format, delivered under `--- Learning check ---`:
 
 1. **Why this matters for what you just did** (1 sentence tying the resource to their actual task).

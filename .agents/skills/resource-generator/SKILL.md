@@ -14,4 +14,6 @@ Pick the medium by gap type:
 - **Interactive HTML** (`interactive.html`): behavioral/dynamic gaps (event loops, state machines). Self-contained single file, no external requests; sliders/steppers that let the user drive the mechanism.
 - **Video storyboard** (`video/`): only for multi-step procedural gaps. Follow the Code2Video Planner-Coder-Critic structure: write `storyboard.md` (scene list: narration + what is on screen) and executable scene code where applicable; actual rendering is optional and never blocks.
 
+**Level-adaptive sizing (usability finding U4)**: scale the artifact to the user's mastery. Low mastery (<0.4): ONE chunk only - a single concrete example with a 3-5 line explanation, no theory dump. Medium: example + concept + one self-check. High: skip generation entirely (recommend or question instead). When in doubt, generate less; a confused reader gains nothing from more text.
+
 Rules: the artifact must NOT contain the direct answer to any active quiz item. Log `{"type": "resource_gen", "kc": "<kc>", "path": "...", "ts": <epoch>}` to `logs/interventions.jsonl`. One artifact per KC gap; extend the existing one instead of duplicating.
