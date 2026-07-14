@@ -1,0 +1,68 @@
+{
+ "model": "Qwen/Qwen2.5-3B-Instruct",
+ "tag": "Qwen2.5-3B-Instruct-pilot",
+ "students": 50,
+ "interactions": 4303,
+ "load_seconds": 22.7,
+ "gen_seconds": 42.8,
+ "answers_per_second": 100.6,
+ "prompts": 4303,
+ "parse_failures": 5,
+ "parse_failure_rate": 0.0012,
+ "gates": {
+  "n_interactions": 4303,
+  "overall_acc": 0.7078782244945387,
+  "difficulty_monotonicity": {
+   "spearman": 0.11555159317505005,
+   "items_used": 219
+  },
+  "learner_separation": {
+   "separation": 0.0067300158468465154,
+   "top_acc": 0.7044711000703708,
+   "bottom_acc": 0.6977410842235243,
+   "students_used": 50
+  },
+  "learning_curve": {
+   "slope": -0.002839474590597414,
+   "curve": {
+    "1": {
+     "acc": 0.7451327433628319,
+     "n": 565
+    },
+    "2": {
+     "acc": 0.6951871657754011,
+     "n": 561
+    },
+    "3": {
+     "acc": 0.7045009784735812,
+     "n": 511
+    },
+    "4": {
+     "acc": 0.7282850779510023,
+     "n": 449
+    },
+    "5": {
+     "acc": 0.6910994764397905,
+     "n": 382
+    },
+    "6": {
+     "acc": 0.7320261437908496,
+     "n": 306
+    },
+    "7": {
+     "acc": 0.684981684981685,
+     "n": 273
+    },
+    "8": {
+     "acc": 0.711864406779661,
+     "n": 236
+    }
+   }
+  },
+  "passed": {
+   "difficulty": false,
+   "separation": false,
+   "learning": false
+  }
+ }
+}

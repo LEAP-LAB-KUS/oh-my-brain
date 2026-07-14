@@ -1,0 +1,3 @@
+synth/data/interactions_*.jsonl
+.venv-vllm/
+__pycache__/

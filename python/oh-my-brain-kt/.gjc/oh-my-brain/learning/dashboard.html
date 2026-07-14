@@ -1,0 +1,41 @@
+<html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>oh-my-brain dashboard</title><style>
+:root{--bg:#f7f7f8;--card:#fff;--ink:#0d0d0d;--sub:#6e6e80;--line:#ececf1;
+--accent:#10a37f;--warn:#e0a03d;--bad:#ef4146;--chip:#f0f0f3}
+@media (prefers-color-scheme:dark){:root{--bg:#161618;--card:#212123;--ink:#ececf1;
+--sub:#9b9ba7;--line:#39393f;--chip:#2c2c30}}
+*{box-sizing:border-box}
+body{font-family:-apple-system,'Segoe UI',Inter,sans-serif;margin:0;background:var(--bg);
+color:var(--ink);-webkit-font-smoothing:antialiased}
+.wrap{max-width:56rem;margin:0 auto;padding:2.2rem 1.4rem 3rem}
+h1{font-size:1.5rem;letter-spacing:-.02em;margin:0 0 .2rem}
+.sub{color:var(--sub);font-size:.9rem;margin-bottom:1.6rem}
+h2{font-size:1.02rem;letter-spacing:-.01em;margin:1.8rem 0 .7rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+padding:1.1rem 1.3rem;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+td,th{border-bottom:1px solid var(--line);padding:.55rem .6rem;text-align:left}
+th{color:var(--sub);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
+tr:last-child td{border-bottom:none}
+.badge{padding:.15rem .55rem;border-radius:999px;font-size:.8rem;font-weight:600;
+display:inline-block;color:#fff}
+.ok{background:var(--accent)} .mid{background:var(--warn)} .bad{background:var(--bad)}
+.meter{background:var(--chip);border-radius:999px;height:8px;width:120px;
+display:inline-block;vertical-align:middle;overflow:hidden}
+.meter>i{display:block;height:100%;border-radius:999px;background:var(--accent);
+transition:width .6s ease}
+small{color:var(--sub)}
+#kcdetail{border:1px dashed var(--line);border-radius:10px;padding:.7rem .9rem;
+min-height:2.2rem;color:var(--ink);margin-top:.6rem;background:var(--card)}
+svg text{pointer-events:none;fill:var(--ink)}
+circle.kc{cursor:pointer;stroke:var(--card);stroke-width:2;
+transition:transform .15s ease,filter .15s ease;transform-box:fill-box;transform-origin:center}
+circle.kc:hover{transform:scale(1.12);filter:brightness(1.08)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin:1px}
+.don{background:var(--accent)} .doff{background:var(--chip);border:1px solid var(--line)}
+</style></head><body><div class='wrap'>
+<h1>Learning dashboard</h1><div class='sub'>oh-my-brain &middot; everything below stays on this machine</div>
+<div class='card'><b>Cognitive debt</b><br><span class='meter' style='width:220px'><i style='width:100%'></i></span> <b>0</b> outstanding &middot; repaid 0/0 (100%)<br><small>accrued = prompts flagged as blind delegation; repaid = correct learning-check answers</small><br><small>KT model: none trained yet; mastery falls back to recent accuracy. Trains automatically after ~20 outcomes.</small></div>
+<h2>Recent prompts</h2><div class='card'><table><tr><th>Prompt</th><th>Debt score</th><th>Triggered</th></tr>
+<tr><td>You are auditing multiple-choice quiz answer keys. For EACH item below, decide w</td><td>-</td><td>-</td></tr>
+</table></div>
+</div></body></html>

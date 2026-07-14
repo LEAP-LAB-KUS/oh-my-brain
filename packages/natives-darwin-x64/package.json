@@ -1,0 +1,30 @@
+{
+	"name": "@gajae-code/natives-darwin-x64",
+	"version": "0.10.2",
+	"description": "Darwin x64 native addon for @gajae-code/natives",
+	"type": "module",
+	"homepage": "https://gajae-code.com",
+	"author": "Yeachan-Heo",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Yeachan-Heo/gajae-code.git",
+		"directory": "packages/natives-darwin-x64"
+	},
+	"bugs": {
+		"url": "https://github.com/Yeachan-Heo/gajae-code/issues"
+	},
+	"os": [
+		"darwin"
+	],
+	"cpu": [
+		"x64"
+	],
+	"files": [
+		"native",
+		"README.md"
+	],
+	"exports": {
+		"./package.json": "./package.json"
+	}
+}

@@ -1,0 +1,8 @@
+{
+  "name": "gajae-code",
+  "description": "Delegate planning, execution, and team workflows to GJC through the coordinator MCP server.",
+  "version": "0.10.2",
+  "commands": "./commands",
+  "skills": "./skills",
+  "mcpServers": "./.mcp.json"
+}

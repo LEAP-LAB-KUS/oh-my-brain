@@ -1,0 +1,29 @@
+{
+ "device": "cuda",
+ "multi_kc": true,
+ "n_kc": 100,
+ "d_model": 64,
+ "max_len": 200,
+ "epochs": 20,
+ "lr": 0.001,
+ "batch_size": 256,
+ "students": {
+  "train": 3200,
+  "val": 400,
+  "test": 400
+ },
+ "interactions": 289752,
+ "final_train_loss": 0.5626984888972982,
+ "train_seconds": 5.9,
+ "warm_start": null,
+ "val": {
+  "auc": 0.6686097741102062,
+  "acc": 0.7046516493479322,
+  "n": 28678
+ },
+ "test": {
+  "auc": 0.6671886638968928,
+  "acc": 0.7229447767422451,
+  "n": 28756
+ }
+}

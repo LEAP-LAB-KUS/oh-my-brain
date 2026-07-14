@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "fixtureName": "multiplexer-viewport-repaint",
+  "terminalWidth": 32,
+  "terminalHeight": 5,
+  "capabilities": {
+    "kittyProtocolActive": true,
+    "hyperlinks": true,
+    "imageProtocol": null
+  },
+  "coverage": [
+    "multiplexer repaint",
+    "TMUX env branch",
+    "offscreen change",
+    "no 3J scrollback clear"
+  ],
+  "artifacts": {
+    "viewport": {
+      "file": "viewport.txt",
+      "sha256": "934b6df0ca622f03771d682c580f3e76fa6c9dc4e6d4b4aa811c7199b1a8d065"
+    },
+    "scrollback": {
+      "file": "scrollback.txt",
+      "sha256": "934b6df0ca622f03771d682c580f3e76fa6c9dc4e6d4b4aa811c7199b1a8d065"
+    },
+    "writelog": {
+      "file": "writelog.bin",
+      "sha256": "71698ee17382b17c1640f29245b42a7e89ea6c8519e09cf2c5ced0939facc524"
+    }
+  }
+}
