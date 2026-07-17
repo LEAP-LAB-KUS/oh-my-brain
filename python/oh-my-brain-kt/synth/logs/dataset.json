@@ -1,0 +1,82 @@
+{
+ "method": "calibrated response model (LLM-measured item difficulty + model strata; persona latents for ability/learning)",
+ "students": 4000,
+ "interactions": 289752,
+ "kcs_used": 100,
+ "questions_used": 1461,
+ "seq_len_mean": 72.4,
+ "seq_len_median": 63,
+ "seq_len_min": 20,
+ "seq_len_max": 200,
+ "overall_acc": 0.71,
+ "multi_kc_interaction_share": 0.5609,
+ "model_strata_logits": {
+  "Qwen2.5-0.5B-Instruct": -0.594,
+  "Qwen2.5-1.5B-Instruct": 0.315,
+  "Qwen2.5-3B-Instruct": 0.441,
+  "SmolLM2-1.7B-Instruct": -0.162
+ },
+ "calibrated_items": 1461,
+ "assist09_reference": {
+  "students": 4163,
+  "kcs": 110,
+  "interactions": 325637,
+  "seq_len_mean": 78
+ },
+ "gates": {
+  "n_interactions": 289752,
+  "overall_acc": 0.7099554101438471,
+  "difficulty_monotonicity": {
+   "spearman": 0.9397720380025417,
+   "items_used": 1461
+  },
+  "learner_separation": {
+   "separation": 0.24702423965644538,
+   "top_acc": 0.821044620485174,
+   "bottom_acc": 0.5740203808287286,
+   "students_used": 4000
+  },
+  "learning_curve": {
+   "slope": 0.02696548014632602,
+   "curve": {
+    "1": {
+     "acc": 0.6133418417435696,
+     "n": 40744
+    },
+    "2": {
+     "acc": 0.6258905600633287,
+     "n": 40424
+    },
+    "3": {
+     "acc": 0.6584122562674095,
+     "n": 35900
+    },
+    "4": {
+     "acc": 0.6899990380607305,
+     "n": 31187
+    },
+    "5": {
+     "acc": 0.7161134163208852,
+     "n": 26028
+    },
+    "6": {
+     "acc": 0.7498017053341265,
+     "n": 20172
+    },
+    "7": {
+     "acc": 0.769813026040784,
+     "n": 17703
+    },
+    "8": {
+     "acc": 0.7912283098783987,
+     "n": 14638
+    }
+   }
+  },
+  "passed": {
+   "difficulty": true,
+   "separation": true,
+   "learning": true
+  }
+ }
+}

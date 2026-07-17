@@ -1,0 +1,25 @@
+{
+  "name": "robogjc-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Glassmorphic SolidJS dashboard bundled by Vite and served by robogjc's FastAPI app.",
+  "scripts": {
+    "dev": "vite",
+    "check": "bun run typecheck",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "solid-js": "catalog:"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "catalog:",
+    "@types/bun": "catalog:",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-solid": "catalog:"
+  }
+}

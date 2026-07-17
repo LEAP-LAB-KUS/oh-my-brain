@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" fill="none">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M1 1L9 5L1 9" fill="none" stroke="#10a37f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      .card{fill:#eef3f0;stroke:#10a37f;stroke-width:2}
+      .title{font:700 18px Inter,-apple-system,sans-serif;fill:#334155}
+      .caption{font:500 11.5px Inter,-apple-system,sans-serif;fill:#64748b}
+      .label{font:600 13px Inter,-apple-system,sans-serif;fill:#10a37f}
+      .icon{stroke:#4f6272;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+      .arrow{stroke:#10a37f;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+      .soft{stroke:#7c8b99;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+      @media (prefers-color-scheme: dark){
+        .card{fill:#18231f;stroke:#10a37f}
+        .title{fill:#d2d8df}
+        .caption{fill:#93a4b5}
+        .icon{stroke:#a9b7c5}
+        .soft{stroke:#93a4b5}
+      }
+    </style>
+  </defs>
+
+  <path class="arrow" d="M1038 100C930 44 684 38 570 70C435 108 302 88 172 112" marker-end="url(#arrow)" opacity=".78"/>
+  <text class="label" x="600" y="48" text-anchor="middle">mastery-gated interventions</text>
+
+  <path class="arrow" d="M226 250H267" marker-end="url(#arrow)"/>
+  <path class="arrow" d="M446 250H487" marker-end="url(#arrow)"/>
+  <path class="arrow" d="M666 250H707" marker-end="url(#arrow)"/>
+  <path class="arrow" d="M886 250H927" marker-end="url(#arrow)"/>
+
+  <g transform="translate(40 150)">
+    <rect class="card" width="186" height="200" rx="22"/>
+    <g class="icon" transform="translate(70 28)">
+      <path d="M8 8h40a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H25l-14 12v-12H8A10 10 0 0 1-2 38V18A10 10 0 0 1 8 8Z"/>
+      <path d="M15 26h30M15 36h18"/>
+    </g>
+    <text class="title" x="93" y="130" text-anchor="middle">Your prompt</text>
+    <text class="caption" x="93" y="158" text-anchor="middle">scored by debt rubric</text>
+    <text class="caption" x="93" y="180" text-anchor="middle">+ LLM judge</text>
+  </g>
+
+  <g transform="translate(260 150)">
+    <rect class="card" width="186" height="200" rx="22"/>
+    <g class="icon" transform="translate(61 30)">
+      <rect x="0" y="8" width="64" height="44" rx="8"/>
+      <path d="M12 23l9 8l17-18"/>
+      <path d="M12 42h40"/>
+    </g>
+    <text class="title" x="93" y="130" text-anchor="middle">Task done first</text>
+    <text class="caption" x="93" y="158" text-anchor="middle">never blocked,</text>
+    <text class="caption" x="93" y="180" text-anchor="middle">never delayed</text>
+  </g>
+
+  <g transform="translate(480 150)">
+    <rect class="card" width="186" height="200" rx="22"/>
+    <g class="icon" transform="translate(65 26)">
+      <rect x="4" y="8" width="56" height="56" rx="10"/>
+      <path d="M32 45v.5"/>
+      <path d="M23 27a9 9 0 1 1 13 8c-3 2-4 4-4 7"/>
+      <path class="soft" d="M15 56h34"/>
+    </g>
+    <text class="title" x="93" y="130" text-anchor="middle">Learning check</text>
+    <text class="caption" x="93" y="158" text-anchor="middle">quiz from audited bank</text>
+    <text class="caption" x="93" y="180" text-anchor="middle">answer key stays in SQLite</text>
+  </g>
+
+  <g transform="translate(700 150)">
+    <rect class="card" width="186" height="200" rx="22"/>
+    <g class="icon" transform="translate(55 29)">
+      <path d="M7 53V33"/>
+      <path d="M22 53V20"/>
+      <path d="M37 53V28"/>
+      <path d="M0 53h45"/>
+      <path d="M53 14c8-5 18-5 26 0v42c-8-5-18-5-26 0V14Z"/>
+      <path d="M79 14c8-5 18-5 26 0v42c-8-5-18-5-26 0V14Z"/>
+      <path class="soft" d="M60 25h12M60 35h12M86 25h12M86 35h12"/>
+    </g>
+    <text class="title" x="93" y="130" text-anchor="middle">Graded + material</text>
+    <text class="caption" x="93" y="158" text-anchor="middle">socratic hints · interactive</text>
+    <text class="caption" x="93" y="180" text-anchor="middle">study pages</text>
+  </g>
+
+  <g transform="translate(920 150)">
+    <rect class="card" width="240" height="200" rx="22"/>
+    <g class="icon" transform="translate(78 26)">
+      <path d="M37 15c-9-10-25-3-25 10c-9 2-11 16-3 22c-4 11 8 21 18 15c5 8 18 5 19-5"/>
+      <path d="M47 15c9-10 25-3 25 10c9 2 11 16 3 22c4 11-8 21-18 15c-5 8-18 5-19-5"/>
+      <path d="M42 13v51"/>
+      <circle cx="93" cy="22" r="3"/>
+      <circle cx="111" cy="38" r="3"/>
+      <circle cx="96" cy="56" r="3"/>
+      <path d="M95 24l14 12M109 40L98 54"/>
+    </g>
+    <text class="title" x="120" y="130" text-anchor="middle">Knowledge tracing</text>
+    <text class="caption" x="120" y="158" text-anchor="middle">AKT mastery adapts</text>
+    <text class="caption" x="120" y="180" text-anchor="middle">difficulty</text>
+  </g>
+</svg>

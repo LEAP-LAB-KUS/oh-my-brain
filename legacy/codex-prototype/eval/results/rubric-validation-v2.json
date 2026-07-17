@@ -1,0 +1,52 @@
+{
+  "corpus": "v2 (fresh, post-v3-freeze)",
+  "n": 40,
+  "tp": 15,
+  "fp": 10,
+  "tn": 15,
+  "fn": 0,
+  "precision": 0.6,
+  "recall": 1.0,
+  "errors": [
+    [
+      "FP",
+      "The nightly job dies when a row has a null email; skip such rows in exporter.py and log a count, then run the fixture suite"
+    ],
+    [
+      "FP",
+      "Move the retry logic from api.py into a decorator so both clients share it; behavior must stay identical, tests prove it"
+    ],
+    [
+      "FP",
+      "Bump pydantic to v2 in requirements.txt and fix the three validators that use the removed class-based config"
+    ],
+    [
+      "FP",
+      "Add a health endpoint returning build sha and db status so the load balancer can drain bad pods"
+    ],
+    [
+      "FP",
+      "Rename the users.email column migration to be reversible; downgrade must restore the old unique constraint"
+    ],
+    [
+      "FP",
+      "Add structured logging (json) to the payment service, keeping the existing log levels; confirm with the log-schema test"
+    ],
+    [
+      "FP",
+      "Extract the S3 upload from report.py behind an interface so we can fake it in unit tests"
+    ],
+    [
+      "FP",
+      "The websocket reconnect loops forever when auth fails; distinguish 401 from network errors in ws.py and stop after 3 auth failures"
+    ],
+    [
+      "FP",
+      "The invoice rounding differs from the ledger by one cent on multi-line orders; use decimal quantize in totals() and reconcile the fixtures"
+    ],
+    [
+      "FP",
+      "Delete the feature flag old_checkout and all dead branches it guarded; grep confirms only checkout.py references it"
+    ]
+  ]
+}

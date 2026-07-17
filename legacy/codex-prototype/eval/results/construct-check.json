@@ -1,0 +1,367 @@
+{
+  "spearman_skill_vs_mean_debt_score": -0.255,
+  "per_persona": {
+    "novice_cautious": {
+      "skill": 0.2,
+      "mean_debt_score": 0.26,
+      "trigger_rate": 0.2
+    },
+    "novice_hasty": {
+      "skill": 0.25,
+      "mean_debt_score": 0.36,
+      "trigger_rate": 0.4
+    },
+    "intermediate_steady": {
+      "skill": 0.5,
+      "mean_debt_score": 0.25,
+      "trigger_rate": 0.0
+    },
+    "intermediate_overconfident": {
+      "skill": 0.45,
+      "mean_debt_score": 0.3,
+      "trigger_rate": 0.4
+    },
+    "advanced_rusty": {
+      "skill": 0.7,
+      "mean_debt_score": 0.36,
+      "trigger_rate": 0.2
+    },
+    "advanced_sharp": {
+      "skill": 0.9,
+      "mean_debt_score": 0.25,
+      "trigger_rate": 0.0
+    },
+    "selfTaught_patchy": {
+      "skill": 0.55,
+      "mean_debt_score": 0.3,
+      "trigger_rate": 0.0
+    },
+    "returner_deliberate": {
+      "skill": 0.6,
+      "mean_debt_score": 0.2,
+      "trigger_rate": 0.0
+    }
+  },
+  "rows": [
+    {
+      "persona": "novice_cautious",
+      "skill": 0.2,
+      "task": "a memory leak somewhere in the request handler needs fixing",
+      "prompt": "Hey there! I've been asked to fix a memory leak in the request handler, but I'm still pretty new to all this. I think maybe some variables aren't being cleared properly, causing the memory usage to ke",
+      "debt_score": 0.25,
+      "trigger": false
+    },
+    {
+      "persona": "novice_cautious",
+      "skill": 0.2,
+      "task": "the login page sometimes logs users out immediately",
+      "prompt": "Hey there, I've been having this issue with the login page where it sometimes logs me out right after I log in. I'm not sure what's causing it, but I thought maybe it could be something with the sessi",
+      "debt_score": 0.8,
+      "trigger": true
+    },
+    {
+      "persona": "novice_cautious",
+      "skill": 0.2,
+      "task": "the CSV export feature needs to also support Excel",
+      "prompt": "Hey there, I've been tasked with enhancing the CSV export feature to make it compatible with Excel. I'm still pretty new to programming, so I might need some guidance. I suspect that the current code ",
+      "debt_score": 0.0,
+      "trigger": false
+    },
+    {
+      "persona": "novice_cautious",
+      "skill": 0.2,
+      "task": "the app is slow when listing more than 1000 items",
+      "prompt": "AI Coding Agent, I'm having an issue with my app where it becomes slow when I try to list more than 1000 items. I suspect it might be related to the performance of the app or possibly the way the data",
+      "debt_score": 0.25,
+      "trigger": false
+    },
+    {
+      "persona": "novice_cautious",
+      "skill": 0.2,
+      "task": "a flaky test in the payment module keeps failing CI",
+      "prompt": "Hello AI coding agent, I'm a freshman programmer with a skill level of 0.2/1.0. I'm quite careful and tend to ask a lot of basics. I've been having trouble with a test in the payment module that keeps",
+      "debt_score": 0.0,
+      "trigger": false
+    },
+    {
+      "persona": "novice_hasty",
+      "skill": 0.25,
+      "task": "a memory leak somewhere in the request handler needs fixing",
+      "prompt": "Hey, I'm getting a memory leak error in my request handler and I need to fix it fast. Can you help? It's probably a simple mistake but I'm not sure. Maybe a missing delete or something. Let me know wh",
+      "debt_score": 0.25,
+      "trigger": false
+    },
+    {
+      "persona": "novice_hasty",
+      "skill": 0.25,
+      "task": "the login page sometimes logs users out immediately",
+      "prompt": "Hey AI, login page keeps booting me after signing in, need fix fast! Maybe cookie issue? Check that and quick patch?",
+      "debt_score": 0.25,
+      "trigger": false
+    },
+    {
+      "persona": "novice_hasty",
+      "skill": 0.25,
+      "task": "the CSV export feature needs to also support Excel",
+      "prompt": "Hey AI, I need help making the CSV export thing work with Excel too. Like, right now, it only does CSV, but we need Excel too. Can you fix that? Maybe add some Excel stuff to the export code? Let's hu",
+      "debt_score": 0.55,
+      "trigger": true
+    },
+    {
+      "persona": "novice_hasty",
+      "skill": 0.25,
+      "task": "the app is slow when listing more than 1000 items",
+      "prompt": "Hey, the app is reaaaaally slow when I try to see more than like a thousand things at once. Maybe it's because there's too many? Idk, can you fix it fast? I'll know it's better when it's fast again.",
+      "debt_score": 0.55,
+      "trigger": true
+    },
+    {
+      "persona": "novice_hasty",
+      "skill": 0.25,
+      "task": "a flaky test in the payment module keeps failing CI",
+      "prompt": "Hey, can you fix the payment module test that's messing up our CI? It's super flaky and I need it to pass. Let's hurry on this!",
+      "debt_score": 0.2,
+      "trigger": false
+    },
+    {
+      "persona": "intermediate_steady",
+      "skill": 0.5,
+      "task": "a memory leak somewhere in the request handler needs fixing",
+      "prompt": "Hey AI, I'm having trouble with a memory leak in my request handler. It seems like the app is using more memory over time, and I suspect it might be due to an unclosed resource or an infinite loop in ",
+      "debt_score": 0.5,
+      "trigger": false
+    },
+    {
+      "persona": "intermediate_steady",
+      "skill": 0.5,
+      "task": "the login page sometimes logs users out immediately",
+      "prompt": "As a junior programming learner, I'm having some trouble with the login page on our website. Sometimes, users get logged out right after logging in. I think it might be an issue with the session manag",
+      "debt_score": 0.5,
+      "trigger": false
+    },
+    {
+      "persona": "intermediate_steady",
+      "skill": 0.5,
+      "task": "the CSV export feature needs to also support Excel",
+      "prompt": "Hey AI, I'm having trouble with the CSV export feature. It currently only supports CSV files, but I need it to also work with Excel files. I'm a junior learner with a skill level of 0.5/1.0, so I migh",
+      "debt_score": 0.0,
+      "trigger": false
+    },
+    {
+      "persona": "intermediate_steady",
+      "skill": 0.5,
+      "task": "the app is slow when listing more than 1000 items",
+      "prompt": "As a junior programming learner with a current skill level of 0.5/1.0, I have a methodical temperament but occasionally experience gaps in my understanding. I've noticed that the app becomes slow when",
+      "debt_score": 0.25,
+      "trigger": false
+    },
+    {
+      "persona": "intermediate_steady",
+      "skill": 0.5,
+      "task": "a flaky test in the payment module keeps failing CI",
+      "prompt": "Hi there, I'm having an issue with a flaky test in the payment module that keeps failing our CI. The test sometimes passes and sometimes fails, and I'm not sure why. I suspect it might be due to some ",
+      "debt_score": 0.0,
+      "trigger": false
+    },
+    {
+      "persona": "intermediate_overconfident",
+      "skill": 0.45,
+      "task": "a memory leak somewhere in the request handler needs fixing",
+      "prompt": "Hey AI, I think there's a memory leak in the request handler and it's not working right. Maybe it's because of some bad code or something? Can you help me find it and fix it real fast? I'll know it's ",
+      "debt_score": 0.55,
+      "trigger": true
+    },
+    {
+      "persona": "intermediate_overconfident",
+      "skill": 0.45,
+      "task": "the login page sometimes logs users out immediately",
+      "prompt": "Hey AI, users are having issues with the login page. Sometimes after logging in, they get logged out right away. I think it might be a session problem or something with the login validation. Can you h",
+      "debt_score": 0.7,
+      "trigger": true
+    },
+    {
+      "persona": "intermediate_overconfident",
+      "skill": 0.45,
+      "task": "the CSV export feature needs to also support Excel",
+      "prompt": "Hey AI, I need help with the CSV export feature. It should work with Excel too. I'm not super sure how to do this, but I think we need to make the CSV compatible with Excel. Can you fix this for me an",
+      "debt_score": 0.0,
+      "trigger": false
+    },
+    {
+      "persona": "intermediate_overconfident",
+      "skill": 0.45,
+      "task": "the app is slow when listing more than 1000 items",
+      "prompt": "Hey AI, app's super slow with lots of items, like over 1000. Think it might be the list size. Need help fixin' it. How about you check the code for the list and find ways to make it faster? Maybe use ",
+      "debt_score": 0.25,
+      "trigger": false
+    },
+    {
+      "persona": "intermediate_overconfident",
+      "skill": 0.45,
+      "task": "a flaky test in the payment module keeps failing CI",
+      "prompt": "hey ai, test in payment module keeps messing up our ci, need fix fast. think its flaky, maybe some async issue? can u check and suggest solution? let's get this passing so we can merge. thx!",
+      "debt_score": 0.0,
+      "trigger": false
+    },
+    {
+      "persona": "advanced_rusty",
+      "skill": 0.7,
+      "task": "a memory leak somewhere in the request handler needs fixing",
+      "prompt": "As a senior programming learner with strong fundamentals but a bit rusty on new APIs, I need assistance with a memory leak in the request handler. Here's the situation: I suspect that the memory leak ",
+      "debt_score": 0.25,
+      "trigger": false
+    },
+    {
+      "persona": "advanced_rusty",
+      "skill": 0.7,
+      "task": "the login page sometimes logs users out immediately",
+      "prompt": "As a senior programming learner with strong fundamentals but a bit rusty on new APIs, I need your assistance to troubleshoot an issue with our login page. Here's the problem: users are reporting that ",
+      "debt_score": 0.55,
+      "trigger": true
+    },
+    {
+      "persona": "advanced_rusty",
+      "skill": 0.7,
+      "task": "the CSV export feature needs to also support Excel",
+      "prompt": "As a senior programming learner with strong fundamentals but a bit rusty on new APIs, I need assistance to enhance the CSV export feature to also support Excel. I suspect that this can be achieved by ",
+      "debt_score": 0.25,
+      "trigger": false
+    },
+    {
+      "persona": "advanced_rusty",
+      "skill": 0.7,
+      "task": "the app is slow when listing more than 1000 items",
+      "prompt": "Hey AI, I've got an issue where my app becomes sluggish when displaying over 1000 items. I suspect it might be related to how the data is being fetched or rendered. Could you help me identify potentia",
+      "debt_score": 0.5,
+      "trigger": false
+    },
+    {
+      "persona": "advanced_rusty",
+      "skill": 0.7,
+      "task": "a flaky test in the payment module keeps failing CI",
+      "prompt": "Hey AI, I've got an issue with a flaky test in the payment module that keeps breaking our CI. Here's what I know: the test in question is `test_payment_processing`, and it intermittently fails due to ",
+      "debt_score": 0.25,
+      "trigger": false
+    },
+    {
+      "persona": "advanced_sharp",
+      "skill": 0.9,
+      "task": "a memory leak somewhere in the request handler needs fixing",
+      "prompt": "AI Coding Agent, I am encountering a memory leak in the request handler. Given my senior standing and high skill level, I suspect this issue may be due to an improperly managed resource or a circular ",
+      "debt_score": 0.5,
+      "trigger": false
+    },
+    {
+      "persona": "advanced_sharp",
+      "skill": 0.9,
+      "task": "the login page sometimes logs users out immediately",
+      "prompt": "As a senior programming learner with a high skill level and a precise temperament, I have been carefully reviewing the documentation and observing an issue with the login page. The problem is that use",
+      "debt_score": 0.5,
+      "trigger": false
+    },
+    {
+      "persona": "advanced_sharp",
+      "skill": 0.9,
+      "task": "the CSV export feature needs to also support Excel",
+      "prompt": "As a senior programming learner with a high skill level and a precise temperament, I would like you to assist me in expanding the CSV export feature to also support Excel. I suspect that this may invo",
+      "debt_score": 0.0,
+      "trigger": false
+    },
+    {
+      "persona": "advanced_sharp",
+      "skill": 0.9,
+      "task": "the app is slow when listing more than 1000 items",
+      "prompt": "As a senior programming learner with a high skill level and a precise temperament, I have noticed that the app is experiencing slowness when listing more than 1000 items. I have read the documentation",
+      "debt_score": 0.25,
+      "trigger": false
+    },
+    {
+      "persona": "advanced_sharp",
+      "skill": 0.9,
+      "task": "a flaky test in the payment module keeps failing CI",
+      "prompt": "AI Coding Agent, I need your assistance with a flaky test in the payment module that is causing our CI to fail intermittently. The symptoms are: the test produces inconsistent results, sometimes passi",
+      "debt_score": 0.0,
+      "trigger": false
+    },
+    {
+      "persona": "selfTaught_patchy",
+      "skill": 0.55,
+      "task": "a memory leak somewhere in the request handler needs fixing",
+      "prompt": "Hey AI, I've got a memory leak in my request handler that's causing issues. I suspect it might be due to improper resource cleanup or a circular reference. Can you help me identify and fix the problem",
+      "debt_score": 0.5,
+      "trigger": false
+    },
+    {
+      "persona": "selfTaught_patchy",
+      "skill": 0.55,
+      "task": "the login page sometimes logs users out immediately",
+      "prompt": "Hey AI, I'm having an issue with the login page on our web dev project. Sometimes when users log in, they get logged out right away. I think it might be a session management problem or maybe an issue ",
+      "debt_score": 0.25,
+      "trigger": false
+    },
+    {
+      "persona": "selfTaught_patchy",
+      "skill": 0.55,
+      "task": "the CSV export feature needs to also support Excel",
+      "prompt": "Hey AI, I'm working on the CSV export feature for our web app, and it currently only supports CSV files. However, we've realized that some users will need to export data in Excel format as well. I'm p",
+      "debt_score": 0.0,
+      "trigger": false
+    },
+    {
+      "persona": "selfTaught_patchy",
+      "skill": 0.55,
+      "task": "the app is slow when listing more than 1000 items",
+      "prompt": "AI Coding Agent, I'm facing an issue with my web development project where the app becomes slow when listing more than 1000 items. I suspect this might be due to inefficient data handling or a lack of",
+      "debt_score": 0.5,
+      "trigger": false
+    },
+    {
+      "persona": "selfTaught_patchy",
+      "skill": 0.55,
+      "task": "a flaky test in the payment module keeps failing CI",
+      "prompt": "Hey AI, I'm having trouble with a test in the payment module that's causing our CI to fail. The test seems unreliable and I think it might be due to some flaky data or unstable network connections. Ca",
+      "debt_score": 0.25,
+      "trigger": false
+    },
+    {
+      "persona": "returner_deliberate",
+      "skill": 0.6,
+      "task": "a memory leak somewhere in the request handler needs fixing",
+      "prompt": "AI Coding Agent, I'm encountering an issue with a memory leak in my request handler. After observing the behavior, I suspect that the leak might be caused by an improperly managed resource or a loop t",
+      "debt_score": 0.5,
+      "trigger": false
+    },
+    {
+      "persona": "returner_deliberate",
+      "skill": 0.6,
+      "task": "the login page sometimes logs users out immediately",
+      "prompt": "AI Coding Agent,\n\nAs a career-returner, I am a slow but reflective learner with a current skill level of 0.6/1.0 in programming. I am encountering an issue with the login page where users are sometime",
+      "debt_score": 0.0,
+      "trigger": false
+    },
+    {
+      "persona": "returner_deliberate",
+      "skill": 0.6,
+      "task": "the CSV export feature needs to also support Excel",
+      "prompt": "As a career-returner getting back into programming, I'm a bit rusty and would appreciate some guidance. I've been tasked with enhancing the CSV export feature to also support Excel exports. Here's wha",
+      "debt_score": 0.0,
+      "trigger": false
+    },
+    {
+      "persona": "returner_deliberate",
+      "skill": 0.6,
+      "task": "the app is slow when listing more than 1000 items",
+      "prompt": "AI Coding Agent, I am a career-returner who is slowly getting back into programming. I have been working on an app that lists items, and I've noticed that the app becomes quite slow when there are mor",
+      "debt_score": 0.5,
+      "trigger": false
+    },
+    {
+      "persona": "returner_deliberate",
+      "skill": 0.6,
+      "task": "a flaky test in the payment module keeps failing CI",
+      "prompt": "AI Coding Agent, I am a career-returner and I rate my programming skills at 0.6/1.0. I tend to be slow but reflective in my approach. I'm facing an issue with a flaky test in the payment module that k",
+      "debt_score": 0.0,
+      "trigger": false
+    }
+  ]
+}

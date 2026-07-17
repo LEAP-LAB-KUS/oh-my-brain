@@ -1,0 +1,33 @@
+{
+	"name": "@gajae-code/natives-linux-arm64",
+	"version": "0.10.2",
+	"description": "Linux arm64 native addon for @gajae-code/natives",
+	"type": "module",
+	"homepage": "https://gajae-code.com",
+	"author": "Yeachan-Heo",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Yeachan-Heo/gajae-code.git",
+		"directory": "packages/natives-linux-arm64"
+	},
+	"bugs": {
+		"url": "https://github.com/Yeachan-Heo/gajae-code/issues"
+	},
+	"os": [
+		"linux"
+	],
+	"cpu": [
+		"arm64"
+	],
+	"libc": [
+		"glibc"
+	],
+	"files": [
+		"native",
+		"README.md"
+	],
+	"exports": {
+		"./package.json": "./package.json"
+	}
+}

@@ -1,0 +1,142 @@
+{
+  "mean_sus": 67.8,
+  "interpretation": "below average (<=68)",
+  "results": [
+    {
+      "persona": "novice_cautious",
+      "skill": 0.2,
+      "answers": [
+        3,
+        5,
+        4,
+        5,
+        4,
+        5,
+        4,
+        5,
+        2,
+        3
+      ],
+      "sus": 35.0
+    },
+    {
+      "persona": "novice_hasty",
+      "skill": 0.25,
+      "answers": [
+        3,
+        1,
+        5,
+        1,
+        3,
+        2,
+        4,
+        2,
+        3,
+        4
+      ],
+      "sus": 70.0
+    },
+    {
+      "persona": "intermediate_steady",
+      "skill": 0.5,
+      "answers": [
+        4,
+        3,
+        4,
+        2,
+        4,
+        2,
+        4,
+        3,
+        3,
+        3
+      ],
+      "sus": 65.0
+    },
+    {
+      "persona": "intermediate_overconfident",
+      "skill": 0.45,
+      "answers": [
+        5,
+        1,
+        5,
+        1,
+        5,
+        1,
+        5,
+        1,
+        5,
+        1
+      ],
+      "sus": 100.0
+    },
+    {
+      "persona": "advanced_rusty",
+      "skill": 0.7,
+      "answers": [
+        4,
+        3,
+        4,
+        3,
+        4,
+        2,
+        4,
+        3,
+        4,
+        2
+      ],
+      "sus": 67.5
+    },
+    {
+      "persona": "advanced_sharp",
+      "skill": 0.9,
+      "answers": [
+        4,
+        2,
+        4,
+        2,
+        4,
+        2,
+        4,
+        2,
+        4,
+        2
+      ],
+      "sus": 75.0
+    },
+    {
+      "persona": "selfTaught_patchy",
+      "skill": 0.55,
+      "answers": [
+        4,
+        3,
+        4,
+        2,
+        3,
+        2,
+        4,
+        3,
+        3,
+        3
+      ],
+      "sus": 62.5
+    },
+    {
+      "persona": "returner_deliberate",
+      "skill": 0.6,
+      "answers": [
+        3,
+        2,
+        4,
+        2,
+        4,
+        2,
+        4,
+        3,
+        4,
+        3
+      ],
+      "sus": 67.5
+    }
+  ]
+}

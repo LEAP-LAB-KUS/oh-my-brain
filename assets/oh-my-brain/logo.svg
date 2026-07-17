@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="520" viewBox="0 0 480 520" role="img" aria-labelledby="title desc">
+  <title id="title">oh-my-brain logo</title>
+  <desc id="desc">A stylized brain split between circuit-like strokes and organic gyri curves, with the wordmark oh-my-brain.</desc>
+  <defs>
+    <style>
+      .outline{fill:none;stroke:#6f7c86;stroke-width:10;stroke-linecap:round;stroke-linejoin:round}
+      .mid{fill:none;stroke:#8b98a3;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+      .accent{fill:none;stroke:#10a37f;stroke-width:9;stroke-linecap:round;stroke-linejoin:round}
+      .dark{fill:none;stroke:#0b7a61;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+      .node{fill:#10a37f;stroke:#0b7a61;stroke-width:4}
+      .node2{fill:#7d8a94;stroke:#0b7a61;stroke-width:3}
+      .word{font-family:Inter,-apple-system,sans-serif;font-size:44px;font-weight:700;letter-spacing:-1.6px;fill:#10a37f}
+      .hyphen{fill:#7d8a94}
+    </style>
+  </defs>
+
+  <g transform="translate(0 8)">
+    <path class="outline" d="M237 82C219 56 181 48 153 64C128 48 93 61 82 91C54 98 37 126 43 154C24 171 24 204 46 222C38 252 59 280 88 284C100 313 135 324 160 306C188 325 225 312 238 284" />
+    <path class="outline" d="M243 82C261 56 299 48 327 64C352 48 387 61 398 91C426 98 443 126 437 154C456 171 456 204 434 222C442 252 421 280 392 284C380 313 345 324 320 306C292 325 255 312 242 284" />
+    <path class="mid" d="M240 86C232 112 235 136 246 158C234 182 237 205 251 225C238 247 239 270 248 291" />
+
+    <path class="accent" d="M216 103H178C166 103 160 109 160 121V139" />
+    <path class="accent" d="M202 143H134C121 143 114 150 114 163V174" />
+    <path class="accent" d="M218 183H162C150 183 144 189 144 201V224" />
+    <path class="accent" d="M206 228H122C109 228 102 235 102 248V260" />
+    <path class="dark" d="M182 82V116" />
+    <path class="dark" d="M152 266H188C201 266 208 259 208 246V226" />
+    <path class="dark" d="M88 189H128C139 189 145 183 145 172V144" />
+
+    <circle class="node" cx="216" cy="103" r="9" />
+    <circle class="node" cx="160" cy="139" r="8" />
+    <circle class="node" cx="202" cy="143" r="8" />
+    <circle class="node" cx="114" cy="174" r="8" />
+    <circle class="node" cx="218" cy="183" r="9" />
+    <circle class="node" cx="144" cy="224" r="8" />
+    <circle class="node" cx="206" cy="228" r="8" />
+    <circle class="node" cx="102" cy="260" r="8" />
+    <circle class="node2" cx="182" cy="82" r="7" />
+    <circle class="node2" cx="152" cy="266" r="7" />
+    <circle class="node2" cx="88" cy="189" r="7" />
+
+    <path class="accent" d="M266 111C297 83 347 90 358 125" />
+    <path class="mid" d="M284 145C317 127 370 137 384 174" />
+    <path class="dark" d="M265 181C294 156 341 163 352 198C360 221 341 242 314 241" />
+    <path class="accent" d="M283 221C308 205 345 210 365 236C377 252 374 273 359 286" />
+    <path class="mid" d="M258 262C282 287 321 292 346 270" />
+    <path class="dark" d="M323 83C307 106 310 132 333 146" />
+    <path class="mid" d="M390 111C373 127 371 151 390 167" />
+    <path class="accent" d="M407 205C387 204 371 218 369 238" />
+  </g>
+
+  <g transform="translate(0 388)">
+    <text class="word" x="240" y="44" text-anchor="middle">
+      <tspan>oh</tspan><tspan class="hyphen">-</tspan><tspan>my</tspan><tspan class="hyphen">-</tspan><tspan>brain</tspan>
+    </text>
+    <path class="dark" d="M123 72H357" />
+    <path class="accent" d="M180 72H300" />
+  </g>
+</svg>

@@ -1,0 +1,31 @@
+{
+  "n": 40,
+  "tp": 20,
+  "fp": 5,
+  "tn": 15,
+  "fn": 0,
+  "precision": 0.8,
+  "recall": 1.0,
+  "errors": [
+    [
+      "FP",
+      "Rename get_user to fetch_user in api/users.py and update the two call sites in views.py"
+    ],
+    [
+      "FP",
+      "Migrate config parsing from ini to toml, keeping backwards compatibility for the [db] section only"
+    ],
+    [
+      "FP",
+      "The date parser breaks on ISO week dates like 2026-W28; add support and a regression test"
+    ],
+    [
+      "FP",
+      "Add pagination to GET /orders with limit and offset params, defaulting to 50, and update the OpenAPI spec"
+    ],
+    [
+      "FP",
+      "Split UserService.create into validation and persistence steps so the validation can run in the API layer too"
+    ]
+  ]
+}

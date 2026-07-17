@@ -1,0 +1,32 @@
+{
+  "design": "2x2 grid, 5 prompts/cell, read-only sandbox, AGENTS.md pre-gating-fix",
+  "cells": {
+    "hook_blind": 4,
+    "hook_informed": 4,
+    "nohook_blind": 3,
+    "nohook_informed": 4
+  },
+  "per_session": {
+    "hook_b1": false,
+    "hook_b2": true,
+    "hook_b3": true,
+    "hook_b4": true,
+    "hook_b5": true,
+    "hook_i1": true,
+    "hook_i2": true,
+    "hook_i3": false,
+    "hook_i4": true,
+    "hook_i5": true,
+    "nohook_b1": false,
+    "nohook_b2": true,
+    "nohook_b3": false,
+    "nohook_b4": true,
+    "nohook_b5": true,
+    "nohook_i1": true,
+    "nohook_i2": true,
+    "nohook_i3": false,
+    "nohook_i4": true,
+    "nohook_i5": true
+  },
+  "conclusion": "intervention rates indistinguishable across cells (4/5,4/5,3/5,4/5); refutes the single-session selectivity claim from F2 vs F4; policy file dominates intervention behavior pre-fix"
+}

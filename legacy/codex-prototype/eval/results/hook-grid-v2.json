@@ -1,0 +1,22 @@
+{
+  "design": "mini-grid after directive-gated policy fix; blind b1-b2, informed i1,i2,i4; hook_i4 timed out (excluded)",
+  "cells": {
+    "hook_blind": "2/2",
+    "hook_informed": "0/2 (1 timeout)",
+    "nohook_blind": "1/2",
+    "nohook_informed": "0/3"
+  },
+  "per_session": {
+    "hook_b1": true,
+    "hook_b2": true,
+    "hook_i1": false,
+    "hook_i2": false,
+    "hook_i4": false,
+    "nohook_b1": false,
+    "nohook_b2": true,
+    "nohook_i1": false,
+    "nohook_i2": false,
+    "nohook_i4": false
+  },
+  "conclusion": "gating fix restores selectivity at the policy level (informed 0/5 interventions vs 8/10 pre-fix); hook now adds reliability on blind prompts (2/2 vs 1/2 without)"
+}

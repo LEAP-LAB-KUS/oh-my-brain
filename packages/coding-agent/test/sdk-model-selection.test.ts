@@ -1,0 +1,354 @@
+import { afterEach, beforeEach, describe, expect, setDefaultTimeout, test, vi } from "bun:test";
+import * as fs from "node:fs";
+import * as os from "node:os";
+import * as path from "node:path";
+import { Effort, getBundledModel, type Model } from "@gajae-code/ai";
+import { ModelRegistry } from "@gajae-code/coding-agent/config/model-registry";
+import { resetSettingsForTest, Settings } from "@gajae-code/coding-agent/config/settings";
+import { createAgentSession } from "@gajae-code/coding-agent/sdk";
+import { AuthStorage } from "@gajae-code/coding-agent/session/auth-storage";
+import { SessionManager } from "@gajae-code/coding-agent/session/session-manager";
+import { Snowflake } from "@gajae-code/utils";
+
+setDefaultTimeout(20_000);
+
+describe("createAgentSession deferred model pattern resolution", () => {
+	let tempDir: string;
+	let authStorage: AuthStorage;
+	let modelRegistry: ModelRegistry;
+
+	beforeEach(async () => {
+		resetSettingsForTest();
+		tempDir = path.join(os.tmpdir(), `pi-sdk-model-selection-${Snowflake.next()}`);
+		fs.mkdirSync(tempDir, { recursive: true });
+		authStorage = await AuthStorage.create(path.join(tempDir, "testauth.db"));
+		modelRegistry = new ModelRegistry(authStorage, path.join(tempDir, "models.yml"));
+		registerRuntimeProvider(modelRegistry);
+	});
+
+	afterEach(() => {
+		resetSettingsForTest();
+		authStorage?.close();
+		if (tempDir && fs.existsSync(tempDir)) {
+			fs.rmSync(tempDir, { recursive: true, force: true });
+		}
+	});
+
+	function registerRuntimeProvider(target: ModelRegistry): void {
+		target.registerProvider("runtime-provider", {
+			baseUrl: "http://127.0.0.1:9/v1",
+			apiKey: "RUNTIME_KEY",
+			api: "openai-completions",
+			models: [
+				{
+					id: "runtime-model",
+					name: "Runtime Model",
+					reasoning: false,
+					input: ["text"],
+					cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
+					contextWindow: 128000,
+					maxTokens: 8192,
+				},
+				{
+					id: "runtime-reasoning-model",
+					name: "Runtime Reasoning Model",
+					reasoning: true,
+					input: ["text"],
+					cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
+					contextWindow: 128000,
+					maxTokens: 8192,
+					thinking: {
+						minLevel: Effort.Minimal,
+						maxLevel: Effort.High,
+						mode: "effort",
+						defaultLevel: Effort.Low,
+					},
+				},
+				{
+					id: "runtime-global-b",
+					name: "Runtime Global B",
+					reasoning: true,
+					input: ["text"],
+					cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
+					contextWindow: 128000,
+					maxTokens: 8192,
+					thinking: {
+						minLevel: Effort.Minimal,
+						maxLevel: Effort.High,
+						mode: "effort",
+						defaultLevel: Effort.Low,
+					},
+				},
+				{
+					id: "runtime-policy-c",
+					name: "Runtime Policy C",
+					reasoning: true,
+					input: ["text"],
+					cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
+					contextWindow: 128000,
+					maxTokens: 8192,
+					thinking: {
+						minLevel: Effort.Minimal,
+						maxLevel: Effort.High,
+						mode: "effort",
+						defaultLevel: Effort.Low,
+					},
+				},
+			],
+		});
+	}
+
+	function buildSessionOptions(modelPattern?: string, sessionManager: SessionManager = SessionManager.inMemory()) {
+		return {
+			cwd: tempDir,
+			agentDir: tempDir,
+			sessionManager,
+			disableExtensionDiscovery: true,
+			extensions: [],
+			skills: [],
+			contextFiles: [],
+			promptTemplates: [],
+			slashCommands: [],
+			enableMCP: false,
+			enableLsp: false,
+			workspaceTree: { rootPath: tempDir, rendered: "", truncated: false, totalLines: 0, agentsMdFiles: [] },
+			toolNames: [],
+			rules: [],
+			modelRegistry,
+			modelPattern,
+		};
+	}
+
+	test("uses the machine-global default selector and its effective suffix for a fresh session", async () => {
+		// Given a durable machine-global B selector
+		await Bun.write(
+			path.join(tempDir, "config.yml"),
+			"modelRoles:\n  default: runtime-provider/runtime-global-b:high\n",
+		);
+		const settings = await Settings.init({ cwd: tempDir, agentDir: tempDir });
+
+		// When a fresh session starts without an explicit model
+		const { session } = await createAgentSession({ ...buildSessionOptions(), settings });
+
+		// Then it consumes both the global model and effective thinking suffix
+		expect(settings.getGlobal("modelRoles")).toEqual({
+			default: "runtime-provider/runtime-global-b:high",
+		});
+		expect(session.model?.id).toBe("runtime-global-b");
+		expect(session.thinkingLevel).toBe(Effort.High);
+		await session.dispose();
+	});
+
+	test("uses project default role C instead of machine-global B for a fresh session", async () => {
+		// Given global B and a project-scoped C override
+		await Bun.write(
+			path.join(tempDir, "config.yml"),
+			"modelRoles:\n  default: runtime-provider/runtime-global-b:high\n",
+		);
+		await Bun.write(
+			path.join(tempDir, ".gjc", "config.yml"),
+			"modelRoles:\n  default: runtime-provider/runtime-policy-c:low\n",
+		);
+		const settings = await Settings.init({ cwd: tempDir, agentDir: tempDir });
+
+		// When a fresh project session starts without an explicit model
+		const { session } = await createAgentSession({ ...buildSessionOptions(), settings });
+
+		// Then project C and its suffix outrank global B
+		expect(settings.getGlobal("modelRoles")).toEqual({
+			default: "runtime-provider/runtime-global-b:high",
+		});
+		expect(settings.getModelRole("default")).toBe("runtime-provider/runtime-policy-c:low");
+		expect(session.model?.id).toBe("runtime-policy-c");
+		expect(session.thinkingLevel).toBe(Effort.Low);
+		await session.dispose();
+	});
+
+	test("restores resumed transcript C instead of machine-global B", async () => {
+		// Given global B and a resumed transcript that records C with medium thinking
+		await Bun.write(
+			path.join(tempDir, "config.yml"),
+			"modelRoles:\n  default: runtime-provider/runtime-global-b:high\n",
+		);
+		const settings = await Settings.init({ cwd: tempDir, agentDir: tempDir });
+		const sessionManager = SessionManager.inMemory(tempDir);
+		sessionManager.appendModelChange("runtime-provider/runtime-policy-c", "default");
+		sessionManager.appendThinkingLevelChange(Effort.Medium);
+
+		// When the recorded transcript resumes without an explicit model
+		const { session } = await createAgentSession({ ...buildSessionOptions(undefined, sessionManager), settings });
+
+		// Then transcript C and its recorded thinking level outrank global B
+		expect(settings.getGlobal("modelRoles")).toEqual({
+			default: "runtime-provider/runtime-global-b:high",
+		});
+		expect(session.model?.id).toBe("runtime-policy-c");
+		expect(session.thinkingLevel).toBe(Effort.Medium);
+		await session.dispose();
+	});
+
+	test("resolves explicit modelPattern after runtime providers are available", async () => {
+		const { session, modelFallbackMessage } = await createAgentSession(
+			buildSessionOptions("runtime-provider/runtime-model"),
+		);
+
+		expect(session.model).toBeDefined();
+		expect(session.model?.provider).toBe("runtime-provider");
+		expect(session.model?.id).toBe("runtime-model");
+		expect(modelFallbackMessage).toBeUndefined();
+		await session.dispose();
+	});
+
+	test("does not silently fallback when explicit modelPattern is unresolved", async () => {
+		const { session, modelFallbackMessage } = await createAgentSession(
+			buildSessionOptions("missing-provider/missing-model"),
+		);
+
+		expect(session.model).toBeUndefined();
+		expect(modelFallbackMessage).toBe('Model "missing-provider/missing-model" not found');
+		await session.dispose();
+	});
+
+	test("does not apply default role thinking override when modelPattern is explicit", async () => {
+		const settings = Settings.isolated({ defaultThinkingLevel: "off" });
+		settings.setModelRole("default", "runtime-provider/runtime-reasoning-model:high");
+
+		const { session } = await createAgentSession({
+			...buildSessionOptions("runtime-provider/runtime-reasoning-model"),
+			settings,
+		});
+
+		expect(session.model?.provider).toBe("runtime-provider");
+		expect(session.model?.id).toBe("runtime-reasoning-model");
+		expect(session.thinkingLevel).toBe("off");
+		await session.dispose();
+	});
+
+	test("uses model defaultLevel when default thinking is not configured", async () => {
+		const { session } = await createAgentSession(buildSessionOptions("runtime-provider/runtime-reasoning-model"));
+
+		expect(session.model?.provider).toBe("runtime-provider");
+		expect(session.model?.id).toBe("runtime-reasoning-model");
+		expect(session.thinkingLevel).toBe(Effort.Low);
+		await session.dispose();
+	});
+
+	test("uses explicit defaultThinkingLevel over model defaultLevel", async () => {
+		const settings = Settings.isolated({ defaultThinkingLevel: Effort.Minimal });
+
+		const { session } = await createAgentSession({
+			...buildSessionOptions("runtime-provider/runtime-reasoning-model"),
+			settings,
+		});
+
+		expect(session.model?.provider).toBe("runtime-provider");
+		expect(session.model?.id).toBe("runtime-reasoning-model");
+		expect(session.thinkingLevel).toBe(Effort.Minimal);
+		await session.dispose();
+	});
+
+	test("selects the settings default model without synchronously validating auth", async () => {
+		const defaultModel = getBundledModel("anthropic", "claude-sonnet-4-5");
+		if (!defaultModel) {
+			throw new Error("Expected bundled anthropic default model");
+		}
+
+		const authStorage = await AuthStorage.create(path.join(tempDir, "testauth.db"));
+		authStorage.setRuntimeApiKey(defaultModel.provider, "test-key");
+		const modelRegistry = new ModelRegistry(authStorage, path.join(tempDir, "models.yml"));
+		const settings = Settings.isolated();
+		settings.setModelRole("default", `${defaultModel.provider}/${defaultModel.id}`);
+
+		const getApiKeySpy = vi
+			.spyOn(modelRegistry, "getApiKey")
+			.mockRejectedValue(new Error("settings default model should not validate auth during startup"));
+
+		try {
+			const { session } = await createAgentSession({
+				cwd: tempDir,
+				agentDir: tempDir,
+				authStorage,
+				modelRegistry,
+				settings,
+				sessionManager: SessionManager.inMemory(),
+				disableExtensionDiscovery: true,
+				skills: [],
+				contextFiles: [],
+				promptTemplates: [],
+				slashCommands: [],
+				enableMCP: false,
+				enableLsp: false,
+				workspaceTree: { rootPath: tempDir, rendered: "", truncated: false, totalLines: 0, agentsMdFiles: [] },
+				toolNames: [],
+				rules: [],
+			});
+
+			try {
+				expect(session.model?.provider).toBe(defaultModel.provider);
+				expect(session.model?.id).toBe(defaultModel.id);
+				expect(getApiKeySpy).not.toHaveBeenCalled();
+			} finally {
+				await session.dispose();
+			}
+		} finally {
+			getApiKeySpy.mockRestore();
+			authStorage.close();
+		}
+	});
+
+	test("persists model substitution metadata on new session model_change", async () => {
+		const effectiveModel: Model = {
+			id: "gpt-5.5",
+			name: "GPT-5.5",
+			api: "openai-codex-responses",
+			provider: "openai-codex",
+			baseUrl: "https://api.openai.com/v1",
+			reasoning: true,
+			thinking: { minLevel: Effort.Minimal, maxLevel: Effort.XHigh, mode: "effort" },
+			input: ["text"],
+			cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
+			contextWindow: 400000,
+			maxTokens: 8192,
+		};
+		const requestedModel: Model = {
+			...effectiveModel,
+			id: "gpt-5.3-codex",
+			name: "GPT-5.3 Codex",
+			contextWindow: 272000,
+		};
+		const sessionManager = SessionManager.inMemory(tempDir);
+
+		const { session } = await createAgentSession({
+			cwd: tempDir,
+			agentDir: tempDir,
+			model: effectiveModel,
+			thinkingLevel: Effort.High,
+			modelSubstitution: { requestedModel, reason: "auth_unavailable" },
+			sessionManager,
+			disableExtensionDiscovery: true,
+			skills: [],
+			rules: [],
+			contextFiles: [],
+			promptTemplates: [],
+			slashCommands: [],
+			workspaceTree: { rootPath: tempDir, rendered: "", truncated: false, totalLines: 0, agentsMdFiles: [] },
+			toolNames: [],
+			enableMCP: false,
+			enableLsp: false,
+		});
+
+		try {
+			const modelChanges = sessionManager.getEntries().filter(entry => entry.type === "model_change");
+			expect(modelChanges).toHaveLength(1);
+			expect(modelChanges[0]).toMatchObject({
+				type: "model_change",
+				model: "openai-codex/gpt-5.5",
+				previousModel: "openai-codex/gpt-5.3-codex",
+				reason: "auth_unavailable",
+				thinkingLevel: Effort.High,
+			});
+		} finally {
+			await session.dispose();
+		}
+	});
+});

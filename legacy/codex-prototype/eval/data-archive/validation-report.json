@@ -1,0 +1,28 @@
+{
+  "spearman_difficulty_vs_error": 0.803,
+  "persona_accuracy": {
+    "novice_cautious": 0.292,
+    "novice_hasty": 0.292,
+    "intermediate_steady": 0.361,
+    "intermediate_overconfident": 0.292,
+    "advanced_rusty": 0.667,
+    "advanced_sharp": 0.819,
+    "selfTaught_patchy": 0.375,
+    "returner_deliberate": 0.417
+  },
+  "accuracy_spread": 0.528,
+  "pass_difficulty_monotonic": true,
+  "pass_learner_separation": true,
+  "valid": true,
+  "spearman_skill_vs_accuracy": 0.976,
+  "accuracy_by_skill_order": {
+    "novice_cautious": 0.292,
+    "novice_hasty": 0.292,
+    "intermediate_overconfident": 0.292,
+    "intermediate_steady": 0.361,
+    "selfTaught_patchy": 0.375,
+    "returner_deliberate": 0.417,
+    "advanced_rusty": 0.667,
+    "advanced_sharp": 0.819
+  }
+}

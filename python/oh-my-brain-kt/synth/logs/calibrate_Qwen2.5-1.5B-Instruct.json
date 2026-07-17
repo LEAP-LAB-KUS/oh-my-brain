@@ -1,0 +1,9 @@
+{
+ "model": "Qwen/Qwen2.5-1.5B-Instruct",
+ "samples_per_item": 12,
+ "items": 1461,
+ "answers": 17532,
+ "unparsed": 0,
+ "seconds": 40.6,
+ "mean_p_correct": 0.7856
+}
