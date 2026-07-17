@@ -11,10 +11,15 @@
 </p>
 
 <p align="center">
+  <a href="https://luma.com/hjuo7auc?tk=yBfjEf"><img alt="2nd place at Ralphthon @ICML" src="https://img.shields.io/badge/%F0%9F%8F%86%20Ralphthon%20%40ICML-2nd%20place-gold?style=flat-square"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-green?style=flat-square"></a>
   <a href="https://github.com/Yeachan-Heo/gajae-code"><img alt="Built on Gajae-Code" src="https://img.shields.io/badge/built%20on-Gajae--Code-ff4d4f?style=flat-square"></a>
   <img alt="Local-first" src="https://img.shields.io/badge/learner%20data-100%25%20local-10a37f?style=flat-square">
   <img alt="Tests" src="https://img.shields.io/badge/tests-47%20bun%20%2B%2028%20pytest-blue?style=flat-square">
+</p>
+
+<p align="center">
+  🏆 <strong>2nd place</strong> at <a href="https://luma.com/hjuo7auc?tk=yBfjEf">Ralphthon @ICML "Auto Research" supported by Codex</a>
 </p>
 
 <p align="center">
@@ -137,6 +142,10 @@ The knowledge-tracing model is a compact variant of AKT:
 
 > Aritra Ghosh, Neil Heffernan, Andrew S. Lan. *Context-Aware Attentive
 > Knowledge Tracing.* KDD 2020.
+
+## Contact
+
+Questions or collaboration: [codingchild@korea.ac.kr](mailto:codingchild@korea.ac.kr)
 
 ## License
 
